@@ -1,0 +1,73 @@
+{
+  "props": [],
+  "components": {
+    "downloader": {
+      "type": "bundle\\http\\HttpDownloader",
+      "x": 304,
+      "y": 272,
+      "props": {
+        "urls": "",
+        "destDirectory": "",
+        "useTempFile": true,
+        "threadCount": 4
+      }
+    },
+    "chooserDownload": {
+      "type": "script\\DirectoryChooserScript",
+      "x": 96,
+      "y": 272,
+      "props": {
+        "inputNode": "",
+        "actionNode": ""
+      }
+    },
+    "clear": {
+      "type": "script\\MacroScript",
+      "x": 304,
+      "y": 192,
+      "props": {}
+    },
+    "getInfo": {
+      "type": "script\\MacroScript",
+      "x": 96,
+      "y": 192,
+      "props": {}
+    },
+    "openBuild": {
+      "type": "script\\MacroScript",
+      "x": 304,
+      "y": 112,
+      "props": {}
+    },
+    "chooserFileOpen": {
+      "type": "script\\FileChooserScript",
+      "x": 96,
+      "y": 112,
+      "props": {
+        "filterName": "Все файлы",
+        "filterExtensions": "*",
+        "filterAny": "0",
+        "inputNode": ""
+      }
+    },
+    "chooserFileSave": {
+      "type": "script\\FileChooserScript",
+      "x": 96,
+      "y": 32,
+      "props": {
+        "saveDialog": true,
+        "filterName": "Все файлы",
+        "filterExtensions": "*",
+        "filterAny": "0",
+        "inputNode": "",
+        "actionNode": "buttonNewBuild"
+      }
+    },
+    "loadContent": {
+      "type": "script\\MacroScript",
+      "x": 304,
+      "y": 32,
+      "props": {}
+    }
+  }
+}
