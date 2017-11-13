@@ -2,7 +2,8 @@
 namespace ddv\forms;
 
 use std, gui, framework, ddv;
-use php\desktop\Mouse; 
+use php\desktop\Mouse;
+use php\gui\UXDesktop;
 
 class MainForm extends AbstractForm {
     /**
@@ -101,15 +102,6 @@ class MainForm extends AbstractForm {
         $GLOBALS['Menu_About']->items->add($itemAbout);
     }
     /**
-     * @event button.action
-     */
-    function doButtonAction(UXEvent $e = null) {
-        //var_dump($GLOBALS['list.mod']);
-        //var_dump($GLOBALS['versions.available']);
-        var_dump( $GLOBALS['versions.codes'] );
-    }
-
-    /**
      * @event modList.click-Right 
      */
     function doModListClickRight(UXMouseEvent $e = null) {
@@ -129,5 +121,22 @@ class MainForm extends AbstractForm {
         $offsetY = Mouse::y() - $this->y - 60;
 
         $contextMenu->showByNode($this->modList, $offsetX, $offsetY);
+    }
+
+    /**
+     * @event modList.click-2x 
+     */
+    function doModListClick2x(UXMouseEvent $e = null) {    
+        if ($this->modList->selectedIndex == -1) {
+            return;
+        }
+        
+        foreach ($GLOBALS['list.mod'] as $index => $element) {
+            if ($this->modList->selectedItem[0] == $element["name"]) {
+                $desktop = new UXDesktop();
+                $desktop->open('http://minecraft.curseforge.com/projects/' . $index . '/');
+                return;
+            }
+        }
     }
 }

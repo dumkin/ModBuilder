@@ -1,6 +1,7 @@
 <?php
 namespace ddv\modules;
 
+use ArithmeticError;
 use std, gui, framework, ddv;
 use php\io\Stream;
 use php\util\Scanner;
@@ -268,9 +269,10 @@ class MainModule extends AbstractModule {
      * @event downloader.progress
      */
     function doDownloaderProgress(ScriptEvent $e = null) {
+        $text = "Загружено {$GLOBALS['mod.downloaded']} / {$GLOBALS['list.count']}\n";
+        $text .= "Скорость: " . number_format($this->downloader->speed / 1024 / 1024, 2, ".", "") . " Мб/с";
 
-        $this->form("MainForm")->showPreloader("Загружено {$GLOBALS['mod.downloaded']} / {$GLOBALS['list.count']}\nСкорость: " .
-            number_format($this->downloader->speed / 1024 / 1024, 2, ".", "") . " Мб/с");
+        $this->form("MainForm")->showPreloader($text);            
     }
     /**
      * @event downloader.done
