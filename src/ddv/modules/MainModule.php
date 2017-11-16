@@ -154,7 +154,7 @@ class MainModule extends AbstractModule {
     public function parseVersions($versions_notParsed) {
         $_versions_notParsed = explode('</option>', $versions_notParsed->html() );
 
-        for ($i = 0; $i < count($_versions_notParsed); $i++) {
+        for ($i = 0; $i < count($_versions_notParsed) - 1; $i++) {
             if (Regex::match('Minecraft', $_versions_notParsed[$i]) or Regex::match('All', $_versions_notParsed[$i])) {
                 continue;
             } elseif (Regex::match('Java', $_versions_notParsed[$i])) {
