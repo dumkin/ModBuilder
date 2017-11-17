@@ -222,6 +222,8 @@ class MainModule extends AbstractModule {
             $id = explode('/', $event->sender->url)[4];
 
             $GLOBALS['list.mod'][$id]['file.name'] = $event->sender->findFirst('div.info-data')->text();
+            $GLOBALS['list.mod'][$id]['file.name'] = str::replace($GLOBALS['list.mod'][$id]['file.name'], " ", "%20");
+            
             $this->getRealFileURL($id);
         });
 
@@ -237,8 +239,6 @@ class MainModule extends AbstractModule {
 
         $firstCode  = (int) substr($url[6], 0, 4);
         $secondCode = (int) substr($url[6], 4);
-
-        $GLOBALS['list.mod'][$id]['file.name'] = str::replace($GLOBALS['list.mod'][$id]['file.name'], " ", "%20");
 
         $GLOBALS['list.mod'][$id]['file.url'] = "https://addons-origin.cursecdn.com/files/$firstCode/$secondCode/{$GLOBALS['list.mod'][$id]['file.name']}$add";
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<?import javafx.scene.*?><?import javafx.collections.*?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?><?import javafx.scene.text.*?><?import javafx.scene.image.*?><?import javafx.scene.shape.*?><?import javafx.scene.web.*?><?import javafx.geometry.*?><?import java.lang.*?><?import org.develnext.jphp.ext.javafx.classes.data.*?><?import org.develnext.jphp.ext.javafx.support.*?><?import org.develnext.jphp.ext.javafx.support.control.*?><?import org.develnext.jphp.ext.game.support.*?><AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" focusTraversable="false" id="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="1280" styleClass="">
+<?import javafx.scene.*?><?import javafx.collections.*?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?><?import javafx.scene.text.*?><?import javafx.scene.image.*?><?import javafx.scene.shape.*?><?import javafx.scene.paint.*?><?import javafx.scene.web.*?><?import javafx.geometry.*?><?import java.lang.*?><?import org.develnext.jphp.ext.javafx.classes.data.*?><?import org.develnext.jphp.ext.javafx.support.*?><?import org.develnext.jphp.ext.javafx.support.control.*?><?import org.develnext.jphp.ext.game.support.*?><AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" focusTraversable="false" id="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720" prefWidth="1280" styleClass="">
   <children>
     <LabelEx alignment="CENTER" autoSize="false" contentDisplay="TEXT_ONLY" ellipsisString="..." focusTraversable="false" graphicTextGap="0" id="info" layoutX="0" layoutY="0" prefHeight="30" prefWidth="1280" styleClass="label " text="Зайдите на страницу мода" textAlignment="CENTER" textFill="#000000" underline="false" wrapText="false">
       <font>
@@ -8,26 +8,26 @@
     </LabelEx>
     <WebView focusTraversable="true" id="browser" layoutX="0" layoutY="30" prefHeight="690" prefWidth="1280"/>
     <Data contextMenuEnabled="" cursor="DEFAULT" enabled="1" id="data-browser" url="" visible="1"/>
-    <FlatButton alignment="CENTER" clickColor="#cccccc" color="#ffffff" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="0" hoverColor="#cccccc" id="home" layoutX="0" layoutY="0" prefHeight="30" prefWidth="30" styleClass="x-flat-button " text="" textAlignment="CENTER" textFill="#000000" underline="false" wrapText="false">
+    <FlatButton alignment="CENTER" clickColor="#cccccc" color="#ffffff" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="0" hoverColor="#cccccc" id="home" layoutX="0" layoutY="0" prefHeight="30" prefWidth="30" styleClass="x-flat-button " text="" textAlignment="CENTER" underline="false" wrapText="false">
       <font>
         <Font name="Arial" size="13"/>
       </font>
     </FlatButton>
     <Data cursor="DEFAULT" enabled="1" graphic=".data/img/home.png" id="data-home" visible="1"/>
     <Data cursor="DEFAULT" enabled="1" id="data-info" visible="1"/>
-    <FlatButton alignment="CENTER" clickColor="#cccccc" color="#ffffff" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="10" hoverColor="#cccccc" id="addMod" layoutX="1110" layoutY="0" prefHeight="30" prefWidth="170" styleClass="x-flat-button " text="Добавить в сборку" textAlignment="CENTER" textFill="#000000" underline="false" wrapText="false">
+    <FlatButton alignment="CENTER" clickColor="#cccccc" color="#ffffff" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="10" hoverColor="#cccccc" id="addMod" layoutX="1110" layoutY="0" prefHeight="30" prefWidth="170" styleClass="x-flat-button " text="Добавить в сборку" textAlignment="CENTER" underline="false" wrapText="false">
       <font>
         <Font name="Arial" size="13"/>
       </font>
     </FlatButton>
     <Data cursor="DEFAULT" enabled="1" graphic=".data/img/ok.png" id="data-addMod" visible="1"/>
-    <FlatButton alignment="CENTER" clickColor="#cccccc" color="#ffffff" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" hoverColor="#cccccc" id="back" layoutX="30" layoutY="0" prefHeight="30" prefWidth="30" styleClass="x-flat-button " text="" textAlignment="CENTER" textFill="#000000" underline="false" wrapText="false">
+    <FlatButton alignment="CENTER" clickColor="#cccccc" color="#ffffff" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" hoverColor="#cccccc" id="back" layoutX="30" layoutY="0" prefHeight="30" prefWidth="30" styleClass="x-flat-button " text="" textAlignment="CENTER" underline="false" wrapText="false">
       <font>
         <Font name="Arial" size="13"/>
       </font>
     </FlatButton>
     <Data cursor="DEFAULT" enabled="1" graphic=".data/img/left.png" id="data-back" visible="1"/>
-    <FlatButton alignment="CENTER" clickColor="#cccccc" color="#ffffff" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" hoverColor="#cccccc" id="forward" layoutX="60" layoutY="0" prefHeight="30" prefWidth="30" styleClass="x-flat-button " text="" textAlignment="CENTER" textFill="#000000" underline="false" wrapText="false">
+    <FlatButton alignment="CENTER" clickColor="#cccccc" color="#ffffff" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" hoverColor="#cccccc" id="forward" layoutX="60" layoutY="0" prefHeight="30" prefWidth="30" styleClass="x-flat-button " text="" textAlignment="CENTER" underline="false" wrapText="false">
       <font>
         <Font name="Arial" size="13"/>
       </font>

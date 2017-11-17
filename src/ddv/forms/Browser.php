@@ -38,7 +38,9 @@ class Browser extends AbstractForm {
         $jsoup->on('parse', function(ScriptEvent $event = null) {
             $type = $event->sender->findFirst('h2.RootGameCategory')->text();
             $name = $event->sender->findFirst('.overflow-tip')->text();
+                        
             $id = explode('/', $this->browser->url)[4];
+            $id = explode('?', $id)[0];
             
             $type = $this->form("MainForm")->parseTypes($type);
         

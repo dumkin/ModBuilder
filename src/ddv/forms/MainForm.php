@@ -139,4 +139,12 @@ class MainForm extends AbstractForm {
             }
         }
     }
+
+    /**
+     * @event button.action 
+     */
+    function doButtonAction(UXEvent $e = null)
+    {    
+        var_dump($GLOBALS['list.mod'],$GLOBALS['versions.codes']);
+    }
 }
