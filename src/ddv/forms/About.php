@@ -7,7 +7,7 @@ class About extends AbstractForm {
     /**
      * @event button.action 
      */
-    function doButtonAction(UXEvent $e = null) {    
+    function doButtonAction(UXEvent $e = null){    
         $this->hide();
     }
 }

@@ -1,18 +1,6 @@
 {
   "props": [],
   "components": {
-    "createMenuBar": {
-      "type": "script\\MacroScript",
-      "x": 96.0,
-      "y": 368.0,
-      "props": {}
-    },
-    "createMenuItem": {
-      "type": "script\\MacroScript",
-      "x": 304.0,
-      "y": 368.0,
-      "props": {}
-    },
     "downloader": {
       "type": "bundle\\http\\HttpDownloader",
       "x": 304,
@@ -62,6 +50,12 @@
         "inputNode": ""
       }
     },
+    "loadContent": {
+      "type": "script\\MacroScript",
+      "x": 304,
+      "y": 32,
+      "props": {}
+    },
     "chooserFileSave": {
       "type": "script\\FileChooserScript",
       "x": 96,
@@ -71,14 +65,9 @@
         "filterName": "Все файлы",
         "filterExtensions": "*",
         "filterAny": "0",
-        "inputNode": ""
+        "inputNode": "",
+        "actionNode": "buttonNewBuild"
       }
-    },
-    "loadContent": {
-      "type": "script\\MacroScript",
-      "x": 304,
-      "y": 32,
-      "props": {}
     }
   }
 }

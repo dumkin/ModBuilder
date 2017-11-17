@@ -29,7 +29,77 @@ class MainForm extends AbstractForm {
             }
         });
 
-        $this->createMenuBar->call();
+        $mainMenu = new UXMenuBar();
+        $mainMenu->width = 800;
+        $this->add($mainMenu);
+
+        $GLOBALS['Menu_Menu'] = new UXMenu('Меню');
+
+        $create = new UXImageView();
+        $create->image = new UXImage('res://.data/img/add.png');
+        $itemCreate = new UXMenuItem('Создать сборку', $create);
+        $itemCreate->on('action', function ($e) use ($itemCreate) {
+            $this->chooserFileSave->execute();
+        });
+
+        $open = new UXImageView();
+        $open->image = new UXImage('res://.data/img/open.png');
+        $itemOpen = new UXMenuItem('Открыть сборку', $open);
+        $itemOpen->on('action', function ($e) use ($itemOpen) {
+           $this->chooserFileOpen->execute();
+        });
+
+        $download = new UXImageView();
+        $download->image = new UXImage('res://.data/img/ok.png');
+        $itemDownload = new UXMenuItem('Загрузить сборку', $download);
+        $itemDownload->on('action', function ($e) use ($itemDownload) {
+           if(!$GLOBALS['build.opened']) {
+               UXDialog::showAndWait("Сначала откройте или создайте сборку!", 'WARNING');
+               return;
+           }
+           $this->showPreloader("Загрузка");
+
+           $this->chooserDownload->execute();
+           $folder = $this->chooserDownload->file;
+
+           $list = [];
+           foreach ($GLOBALS['list.mod'] as $element) {
+               $list[] = $element['file.url'];
+           }
+
+           $this->downloader->useTempFile = true;
+           $this->downloader->destDirectory = $folder;
+           $this->downloader->urls = $list;
+           $this->downloader->start();
+        });
+
+        $GLOBALS['Menu_Mod'] = new UXMenu('Мод');
+
+        $search = new UXImageView();
+        $search->image = new UXImage('res://.data/img/add.png');
+        $itemSearch = new UXMenuItem('Поиск в браузере', $search);
+        $itemSearch->on('action', function ($e) use ($itemSearch) {
+            $this->form("Browser")->show();
+        });
+        
+        $GLOBALS['Menu_About'] = new UXMenu('О программе');
+
+        $about = new UXImageView();
+        $about->image = new UXImage('res://.data/img/add.png');
+        $itemAbout = new UXMenuItem('Поиск в браузере', $about);
+        $itemAbout->on('action', function ($e) use ($itemAbout) {
+            $this->form("About")->showAndWait();
+        });
+
+        $mainMenu->menus->add($GLOBALS['Menu_Menu']);
+        $mainMenu->menus->add($GLOBALS['Menu_Mod']);
+        $mainMenu->menus->add($GLOBALS['Menu_About']);
+
+        $GLOBALS['Menu_Menu']->items->add($itemCreate);
+        $GLOBALS['Menu_Menu']->items->add($itemOpen);
+        $GLOBALS['Menu_Menu']->items->add($itemDownload);
+        $GLOBALS['Menu_Mod']->items->add($itemSearch);
+        $GLOBALS['Menu_About']->items->add($itemAbout);
     }
     /**
      * @event modList.click-Right 
