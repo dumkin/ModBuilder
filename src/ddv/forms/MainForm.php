@@ -31,6 +31,7 @@ class MainForm extends AbstractForm {
 
         $this->createMenuBar();
     }
+    
     /**
      * @event modList.click-Right 
      */
@@ -68,13 +69,5 @@ class MainForm extends AbstractForm {
                 return;
             }
         }
-    }
-
-    /**
-     * @event button.action 
-     */
-    function doButtonAction(UXEvent $e = null)
-    {    
-        var_dump($GLOBALS['list.mod'],$GLOBALS['versions.codes']);
     }
 }

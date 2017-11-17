@@ -13,11 +13,5 @@
       </items>
     </ComboBox>
     <Data cursor="DEFAULT" enabled="1" id="data-combobox" visible="1"/>
-    <Button alignment="CENTER" contentDisplay="LEFT" ellipsisString="..." focusTraversable="true" graphicTextGap="4" id="button" layoutX="500" layoutY="200" prefHeight="30" prefWidth="150" styleClass="button " text="Кнопка" textAlignment="CENTER" underline="false" wrapText="false">
-      <font>
-        <Font name="System Regular" size="13"/>
-      </font>
-    </Button>
-    <Data cursor="DEFAULT" enabled="1" id="data-button" visible="1"/>
   </children>
 </AnchorPane>
