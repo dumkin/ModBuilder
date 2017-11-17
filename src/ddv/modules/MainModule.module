@@ -50,12 +50,6 @@
         "inputNode": ""
       }
     },
-    "loadContent": {
-      "type": "script\\MacroScript",
-      "x": 304,
-      "y": 32,
-      "props": {}
-    },
     "chooserFileSave": {
       "type": "script\\FileChooserScript",
       "x": 96,
@@ -68,6 +62,12 @@
         "inputNode": "",
         "actionNode": "buttonNewBuild"
       }
+    },
+    "loadContent": {
+      "type": "script\\MacroScript",
+      "x": 304,
+      "y": 32,
+      "props": {}
     }
   }
 }
