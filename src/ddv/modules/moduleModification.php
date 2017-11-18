@@ -113,7 +113,6 @@ class moduleModification extends AbstractModule {
         return $View;
     }
 
-
     public function addItem($id) {
         $ver = $GLOBALS["project"]["mods"]["list"][$id]['version'];
 

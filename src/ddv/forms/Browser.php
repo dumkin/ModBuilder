@@ -10,8 +10,8 @@ class Browser extends AbstractForm {
      * @event addMod.action
      */
     function doAddModAction(UXEvent $e = null) {
-        if(!$GLOBALS['build.opened']) {
-            UXDialog::showAndWait("Сначала откройте или создайте сборку!", 'WARNING');
+        if(!$GLOBALS["project"]["opened"]) {
+            UXDialog::showAndWait("Сначала откройте или создайте сборку!", "WARNING");
             return;
         }
 
@@ -24,8 +24,8 @@ class Browser extends AbstractForm {
             return;
         }
 
-        foreach ($GLOBALS['list.mod'] as $key => $value) {
-            if($key == $name) {
+        foreach ($GLOBALS["project"]["mods"]["list"] as $id => $value) {
+            if($id == $name) {
                 UXDialog::showAndWait("Мод уже был добавлен в сборку!", 'WARNING');
                 $this->hidePreloader();
                 return;
@@ -37,18 +37,24 @@ class Browser extends AbstractForm {
         
         $jsoup->on('parse', function(ScriptEvent $event = null) {
             $type = $event->sender->findFirst('h2.RootGameCategory')->text();
+            $type = app()->module("moduleModification")->parseTypes($type);
+            
             $name = $event->sender->findFirst('.overflow-tip')->text();
                         
             $id = explode('/', $this->browser->url)[4];
             $id = explode('?', $id)[0];
             
-            $type = $this->form("MainForm")->parseTypes($type);
-        
-            Stream::putContents($GLOBALS['build.file'], "\n" . $id, "a+");
+            Stream::putContents($GLOBALS["project"]["file"], "\n" . $id, "a+");
             
-            $this->form("MainForm")->showPreloader("Загрузка данных");
-            $GLOBALS['list.count']++;
-            $this->form("MainForm")->getInfo($id);
+            $GLOBALS["project"]["mods"]["count"]++;
+            $GLOBALS["project"]["mods"]["list"][$id] = [];
+            
+            $this->form("MainForm")->showPreloader("Получение информации о модах");
+
+            app()->module("moduleModification")->parseClear();
+            foreach ($GLOBALS["project"]["mods"]["list"] as $id => $element) {
+                app()->module("moduleModification")->parseId($id);
+            }
             
             UXDialog::showAndWait("$type $name - добавлен в сборку!");
             $this->hidePreloader();

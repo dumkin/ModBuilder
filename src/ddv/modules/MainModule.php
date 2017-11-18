@@ -3,13 +3,6 @@ namespace ddv\modules;
 
 use ArithmeticError;
 use std, gui, framework, ddv;
-use php\io\Stream;
-use php\util\Scanner;
-use script\JsoupScript;
-use php\io\IOException;
-use php\lib\fs;
-use php\lib\arr;
-use php\util\Regex;
 
 class MainModule extends AbstractModule {
     public function createMenuItem($name, $imagePath, $functionAction) { 
