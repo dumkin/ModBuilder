@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?import javafx.scene.*?><?import javafx.collections.*?><?import javafx.scene.layout.*?><?import javafx.scene.control.*?><?import javafx.scene.text.*?><?import javafx.scene.image.*?><?import javafx.scene.shape.*?><?import javafx.scene.paint.*?><?import javafx.scene.web.*?><?import javafx.geometry.*?><?import java.lang.*?><?import org.develnext.jphp.ext.javafx.classes.data.*?><?import org.develnext.jphp.ext.javafx.support.*?><?import org.develnext.jphp.ext.javafx.support.control.*?><?import org.develnext.jphp.ext.game.support.*?><AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" focusTraversable="false" id="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600" prefWidth="800" styleClass="">
   <children>
-    <ListViewEx editable="false" fixedCellSize="-1" focusTraversable="true" id="modList" layoutX="0" layoutY="28" prefHeight="572" prefWidth="400" styleClass="list-view ">
+    <ListViewEx editable="false" fixedCellSize="-1" focusTraversable="true" id="modList" layoutX="0" layoutY="30" prefHeight="570" prefWidth="400" styleClass="list-view ">
       <items xmlns:fx="http://javafx.com/fxml">
         <FXCollections fx:factory="observableArrayList"/>
       </items>
     </ListViewEx>
     <Data cursor="DEFAULT" enabled="1" id="data-modList" visible="1"/>
-    <ComboBox editable="false" focusTraversable="true" id="combobox" layoutX="410" layoutY="31" prefHeight="26" prefWidth="190" promptText="" styleClass="combo-box-base combo-box " value="" visibleRowCount="10">
+    <ComboBox editable="false" focusTraversable="true" id="combobox" layoutX="430" layoutY="30" prefHeight="28" prefWidth="190" promptText="" styleClass="combo-box-base combo-box " value="" visibleRowCount="10">
       <items xmlns:fx="http://javafx.com/fxml">
         <FXCollections fx:factory="observableArrayList"/>
       </items>
     </ComboBox>
     <Data cursor="DEFAULT" enabled="1" id="data-combobox" visible="1"/>
+    <ListViewEx editable="false" fixedCellSize="-1" focusTraversable="true" id="listView" layoutX="410" layoutY="440" prefHeight="160" prefWidth="390" styleClass="list-view ">
+      <items xmlns:fx="http://javafx.com/fxml">
+        <FXCollections fx:factory="observableArrayList"/>
+      </items>
+    </ListViewEx>
+    <Data cursor="DEFAULT" enabled="1" id="data-listView" visible="1"/>
   </children>
 </AnchorPane>

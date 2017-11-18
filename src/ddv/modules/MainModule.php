@@ -199,57 +199,6 @@ class MainModule extends AbstractModule {
         return $View;
     }
 
-    public function modsDownload($version) {
-        $this->chooserDownload->execute(); 
-        $folder = $this->chooserDownload->file;
-        
-        $this->downloader->useTempFile = true; 
-        $this->downloader->destDirectory = $folder; 
-
-        $GLOBALS['download.progress'] = 0;
-        $GLOBALS['download.progress.max'] = count($GLOBALS['list.mod']);
-        
-        foreach ($GLOBALS['list.mod'] as $key => $element) {
-            $this->getRealFileURL('http://minecraft.curseforge.com/projects/' . $key . '/files?filter-game-version=' . $GLOBALS['versions.codes'][$version]);
-        }
-    }
-    
-    public function modsDownloadStart() {
-        $this->downloader->urls = $GLOBALS['download.list.url']; 
-        $this->downloader->start(); 
-    }
-    
-    public function getRealFileURL($url) {
-        $jsoup = new JsoupScript;
-        $jsoup->url = $url;
-
-        $jsoup->on('parse', function(ScriptEvent $event = null) {
-            $jsoup = new JsoupScript;
-            $jsoup->url = "https://minecraft.curseforge.com" . $event->sender->findFirst('a.overflow-tip')->attr("href");
-
-            $jsoup->on('parse', function(ScriptEvent $event = null) {
-                $url = explode('/', $event->sender->url);
-
-                $firstCode  = (int) substr($url[6], 0, 4);
-                $secondCode = (int) substr($url[6], 4);
-                
-                $fileName = $event->sender->findFirst('div.info-data')->text(); 
-                $fileName = str::replace($fileName, " ", "%20"); 
-        
-                $GLOBALS['download.list.url'][] = "https://addons-origin.cursecdn.com/files/$firstCode/$secondCode/{$fileName}$add";
-
-                $GLOBALS['download.progress']++;
-                $this->showPreloader("Подготовлено: {$GLOBALS['download.progress']} / {$GLOBALS['download.progress.max']}"); 
-                if ($GLOBALS['download.progress.max'] == $GLOBALS['download.progress']) {
-                    $this->modsDownloadStart();
-                }
-            });
-    
-            $jsoup->parseAsync();
-        });
-
-        $jsoup->parseAsync();
-    }
 
     public function addItem($id) {
         $ver = $GLOBALS['list.mod'][$id]['version'];
@@ -268,47 +217,6 @@ class MainModule extends AbstractModule {
         if ($GLOBALS['getInfo.error'] + $GLOBALS['getInfo.parse'] == $GLOBALS['list.count']) {
             $this->form("MainForm")->hidePreloader();
         }
-    }
-
-    /**
-    * @event downloader.progress
-    */
-    function doDownloaderProgress(ScriptEvent $e = null) {
-        $text = "Загружено {$GLOBALS['mod.downloaded']} / {$GLOBALS['list.count']}\n";
-        $text .= "Скорость: " . number_format($this->downloader->speed / 1024 / 1024, 2, ".", "") . " Мб/с";
-
-        $this->form("MainForm")->showPreloader($text);            
-    }
-
-    /**
-    * @event downloader.done
-    */
-    function doDownloaderDone(ScriptEvent $e = null) {
-        $this->form("MainForm")->hidePreloader();
-    }
-
-    /**
-    * @event downloader.errorOne
-    */
-    function doDownloaderErrorOne(ScriptEvent $e = null) {
-        $message = $e->error ?: 'Неизвестная ошибка';
-
-        if ($e->response->isNotFound()) {
-            $message = 'Файл не найден';
-        } else if ($e->response->isAccessDenied()) {
-            $message = 'Доступ запрещен';
-        } else if ($e->response->isServerError()) {
-            $message = 'Сервер недоступен';
-        }
-
-        UXDialog::show('Ошибка загрузки файла: ' . $message, 'ERROR');
-    }
-
-    /**
-    * @event downloader.successOne
-    */
-    function doDownloaderSuccessOne(ScriptEvent $e = null) {
-        $GLOBALS['mod.downloaded']++;
     }
 
     public function createMenuItem($name, $imagePath, $functionAction) { 
@@ -354,7 +262,11 @@ class MainModule extends AbstractModule {
             
             $this->showPreloader("Подготовка к загрузке"); 
 
-            $this->modsDownload($this->combobox->selected);
+            //$this->modsDownload($this->combobox->selected);
+            app()->module('moduleDownload')->modsDownload($this->combobox->selected);
+            //$this->appModule("moduleDownload")->modsDownload($this->combobox->selected);
+           
+            //$this->modsDownload($this->combobox->selected);
         }); 
 
         $GLOBALS['formMain_menuBar_menuBuild'] = $this->createMenu("Сборка", $itemsBuild); 
@@ -374,8 +286,9 @@ class MainModule extends AbstractModule {
         $GLOBALS['formMain_menuBar_menuHelp'] = $this->createMenu("Помощь", $itemsHelp); 
 
         // Menu bar 
-        $GLOBALS['formMain_menuBar'] = new UXMenuBar(); 
-        $GLOBALS['formMain_menuBar']->width = $this->form("MainForm")->width; 
+        $GLOBALS['formMain_menuBar'] = new UXMenuBar();
+        $GLOBALS['formMain_menuBar']->width = $this->form("MainForm")->width;
+        $GLOBALS['formMain_menuBar']->height = 30;
 
         $GLOBALS['formMain_menuBar']->menus->add($GLOBALS['formMain_menuBar_menuBuild']); 
         $GLOBALS['formMain_menuBar']->menus->add($GLOBALS['formMain_menuBar_menuMod']); 

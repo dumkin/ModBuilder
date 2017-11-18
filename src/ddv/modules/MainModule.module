@@ -1,26 +1,6 @@
 {
   "props": [],
   "components": {
-    "downloader": {
-      "type": "bundle\\http\\HttpDownloader",
-      "x": 304,
-      "y": 272,
-      "props": {
-        "urls": "",
-        "destDirectory": "",
-        "useTempFile": true,
-        "threadCount": 4
-      }
-    },
-    "chooserDownload": {
-      "type": "script\\DirectoryChooserScript",
-      "x": 96,
-      "y": 272,
-      "props": {
-        "inputNode": "",
-        "actionNode": ""
-      }
-    },
     "clear": {
       "type": "script\\MacroScript",
       "x": 304,
@@ -50,12 +30,6 @@
         "inputNode": ""
       }
     },
-    "loadContent": {
-      "type": "script\\MacroScript",
-      "x": 304,
-      "y": 32,
-      "props": {}
-    },
     "chooserFileSave": {
       "type": "script\\FileChooserScript",
       "x": 96,
@@ -65,9 +39,14 @@
         "filterName": "Все файлы",
         "filterExtensions": "*",
         "filterAny": "0",
-        "inputNode": "",
-        "actionNode": "buttonNewBuild"
+        "inputNode": ""
       }
+    },
+    "loadContent": {
+      "type": "script\\MacroScript",
+      "x": 304,
+      "y": 32,
+      "props": {}
     }
   }
 }
