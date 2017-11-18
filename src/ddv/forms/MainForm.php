@@ -42,7 +42,20 @@ class MainForm extends AbstractForm {
         
         $itemDelete = new UXMenuItem('Удалить'); 
         $itemDelete->on('action', function () use ($itemDelete) {
+            $id = 0;
+            foreach ($GLOBALS["project"]["mods"]["list"] as $index => $element) {
+                if ($this->modList->selectedItem[0] == $element["name"]) {
+                    $id = $index;
+                }
+            }
+        
+            unset($GLOBALS["project"]["mods"]["list"][$id]);
             $this->modList->items->removeByIndex($this->modList->selectedIndex);
+                     
+            $id = array_keys($GLOBALS["project"]["mods"]["list"]);
+            $id = implode("\n", $id);
+            
+            Stream::putContents($GLOBALS["project"]["file"], $id);
         });
         
         $contextMenu = new UXContextMenu();
@@ -62,7 +75,7 @@ class MainForm extends AbstractForm {
             return;
         }
         
-        foreach ($GLOBALS['list.mod'] as $index => $element) {
+        foreach ($GLOBALS["project"]["mods"]["list"] as $index => $element) {
             if ($this->modList->selectedItem[0] == $element["name"]) {
                 $desktop = new UXDesktop();
                 $desktop->open('http://minecraft.curseforge.com/projects/' . $index . '/');

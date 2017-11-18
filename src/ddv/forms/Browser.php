@@ -36,25 +36,26 @@ class Browser extends AbstractForm {
         $jsoup->url = $this->browser->url;
         
         $jsoup->on('parse', function(ScriptEvent $event = null) {
-            $type = $event->sender->findFirst('h2.RootGameCategory')->text();
-            $type = app()->module("moduleModification")->parseTypes($type);
+            $this->form("MainForm")->showPreloader("Получение информации о модах");
             
-            $name = $event->sender->findFirst('.overflow-tip')->text();
-                        
             $id = explode('/', $this->browser->url)[4];
             $id = explode('?', $id)[0];
             
-            Stream::putContents($GLOBALS["project"]["file"], "\n" . $id, "a+");
-            
             $GLOBALS["project"]["mods"]["count"]++;
+            $GLOBALS["modification"]["parsing"]["all"]++;
             $GLOBALS["project"]["mods"]["list"][$id] = [];
             
-            $this->form("MainForm")->showPreloader("Получение информации о модах");
+            $ids = array_keys($GLOBALS["project"]["mods"]["list"]);
+            $ids = implode("\n", $ids);
+            
+            Stream::putContents($GLOBALS["project"]["file"], $ids);
 
-            app()->module("moduleModification")->parseClear();
-            foreach ($GLOBALS["project"]["mods"]["list"] as $id => $element) {
-                app()->module("moduleModification")->parseId($id);
-            }
+            app()->module("moduleModification")->parseId($id);
+            
+            $name = $event->sender->findFirst('.overflow-tip')->text();
+            
+            $type = $event->sender->findFirst('h2.RootGameCategory')->text();
+            $type = app()->module("moduleModification")->parseTypes($type);
             
             UXDialog::showAndWait("$type $name - добавлен в сборку!");
             $this->hidePreloader();
