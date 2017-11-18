@@ -3,8 +3,8 @@
   "components": {
     "downloader": {
       "type": "bundle\\http\\HttpDownloader",
-      "x": 64.0,
-      "y": 16.0,
+      "x": 64,
+      "y": 16,
       "props": {
         "useTempFile": true,
         "threadCount": 8,

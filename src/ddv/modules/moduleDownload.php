@@ -26,7 +26,7 @@ class moduleDownload extends AbstractModule {
     function doDownloaderProgress(ScriptEvent $e = null) {
         $speed = number_format($this->downloader->speed / 1024 / 1024, 2, ".", "");
     
-        $text = "Загружено {$GLOBALS['mod.downloaded']} / {$GLOBALS['list.count']}\n" .
+        $text = "Загружено {$GLOBALS["download"]["file"]["success"]} / {$GLOBALS["download"]["file"]["all"]}\n" .
                 "Скорость: {$speed} Мб/с";
 
         app()->form("MainForm")->showPreloader($text);           
@@ -36,7 +36,7 @@ class moduleDownload extends AbstractModule {
      * @event downloader.successOne 
      */
     function doDownloaderSuccessOne(ScriptEvent $e = null) {
-        $GLOBALS['mod.downloaded']++;
+        $GLOBALS["download"]["file"]["success"]++;
     }
 
     /**
@@ -57,26 +57,30 @@ class moduleDownload extends AbstractModule {
     }
     
     
-    public function modsDownload($version) {
+    public function downloadStart($version) {
+        app()->form("MainForm")->showPreloader("Выберите папку для скачивания модов");
+    
         $directoryChooser = new DirectoryChooserScript;
-        $directoryChooser->execute(); 
+        
+        if (!$directoryChooser->execute()) {
+            app()->form("MainForm")->hidePreloader();
+            return;
+        }
+        
+        app()->form("MainForm")->showPreloader("Подготовка к скачиванию модов"); 
         
         $this->downloader->destDirectory = $directoryChooser->file;
 
-        $GLOBALS['download.progress'] = 0;
-        $GLOBALS['download.progress.max'] = count($GLOBALS['list.mod']);
+        $GLOBALS["download"]["prepare"]["all"] = $GLOBALS["project"]["mods"]["count"];
+        $GLOBALS["download"]["prepare"]["success"] = 0;
+        $GLOBALS["download"]["prepare"]["error"] = 0;
         
-        foreach ($GLOBALS['list.mod'] as $key => $element) {
-            $this->getRealFileURL('http://minecraft.curseforge.com/projects/' . $key . '/files?filter-game-version=' . $GLOBALS['versions.codes'][$version]);
+        foreach ($GLOBALS["project"]["mods"]["list"] as $id => $element) {
+            $this->parseRealLatestFile('http://minecraft.curseforge.com/projects/' . $id . '/files?filter-game-version=' . $GLOBALS['versions.codes'][$version]);
         }
     }
-    
-    public function modsDownloadStart() {
-        $this->downloader->urls = $GLOBALS['download.list.url']; 
-        $this->downloader->start(); 
-    }
-    
-    public function getRealFileURL($url) {
+        
+    public function parseRealLatestFile($url) {
         $jsoup = new JsoupScript;
         $jsoup->url = $url;
 
@@ -93,12 +97,24 @@ class moduleDownload extends AbstractModule {
                 $fileName = $event->sender->findFirst('div.info-data')->text(); 
                 $fileName = str::replace($fileName, " ", "%20"); 
         
-                $GLOBALS['download.list.url'][] = "https://addons-origin.cursecdn.com/files/$firstCode/$secondCode/{$fileName}$add";
-
-                $GLOBALS['download.progress']++;
-                app()->form("MainForm")->showPreloader("Подготовлено: {$GLOBALS['download.progress']} / {$GLOBALS['download.progress.max']}"); 
-                if ($GLOBALS['download.progress.max'] == $GLOBALS['download.progress']) {
-                    $this->modsDownloadStart();
+                $GLOBALS["download"]["list"][] = "https://addons-origin.cursecdn.com/files/$firstCode/$secondCode/{$fileName}";
+                
+                $GLOBALS["download"]["prepare"]["success"]++;
+            
+                $text = "Подготовлено: {$GLOBALS["download"]["prepare"]["success"]} / {$GLOBALS["download"]["prepare"]["all"]}";
+                if ($GLOBALS["download"]["prepare"]["error"] != 0) {
+                    $text .= "\nОшибок: {$GLOBALS["download"]["prepare"]["error"]}";
+                }
+                
+                $this->form("MainForm")->showPreloader($text);
+    
+                if ($GLOBALS["download"]["prepare"]["success"] + $GLOBALS["download"]["prepare"]["error"] == $GLOBALS["download"]["prepare"]["all"]) {
+                    $GLOBALS["download"]["file"]["all"] = $GLOBALS["project"]["mods"]["count"];
+                    $GLOBALS["download"]["file"]["success"] = 0;
+                    $GLOBALS["download"]["file"]["error"] = 0;
+                
+                    $this->downloader->urls = $GLOBALS["download"]["list"]; 
+                    $this->downloader->start();
                 }
             });
     
