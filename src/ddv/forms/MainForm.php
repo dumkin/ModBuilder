@@ -83,5 +83,4 @@ class MainForm extends AbstractForm {
             }
         }
     }
-
 }

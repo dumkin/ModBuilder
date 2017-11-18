@@ -77,7 +77,7 @@ class moduleDownload extends AbstractModule {
         $GLOBALS["download"]["list"] = [];
         
         foreach ($GLOBALS["project"]["mods"]["list"] as $id => $element) {
-            $this->parseRealLatestFile('http://minecraft.curseforge.com/projects/' . $id . '/files?filter-game-version=' . $GLOBALS['versions.codes'][$version]);
+            $this->parseRealLatestFile('http://minecraft.curseforge.com/projects/' . $id . '/files?filter-game-version=' . $GLOBALS["project"]["versions"]["all"][$version]);
         }
     }
         
