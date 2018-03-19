@@ -18,9 +18,6 @@ namespace ModBuilder
                 Projects.Repair();
             }
 
-            Projects.Data = Config.Load<List<String>>(Directory.GetCurrentDirectory() + "\\projects.json");
-
-            Projects.Repair();
             Config.Save(Projects.Data, Directory.GetCurrentDirectory() + "\\projects.json");
 
             foreach (var Item in Projects.Data)
