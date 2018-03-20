@@ -1,5 +1,6 @@
 ﻿using ModBuilder.Extension;
 using ModBuilder.Project;
+using System;
 using System.Windows.Forms;
 
 namespace ModBuilder.GUI
@@ -25,7 +26,7 @@ namespace ModBuilder.GUI
             
             for (var i = 0; i < PProject.SExtension_ID.Count; i++)
             {
-                Parse.AsyncGetImageURL(PProject.SExtension_ID[i]);
+                Parse.AsyncGetAllData(PProject.SExtension_ID[i]);
             }
         }
     }
