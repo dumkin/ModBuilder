@@ -26,8 +26,20 @@ namespace ModBuilder.GUI
             
             for (var i = 0; i < PProject.SExtension_ID.Count; i++)
             {
-                Parse.AsyncGetAllData(PProject.SExtension_ID[i]);
+                Parse.AsyncGetAllData(PProject.SExtension_ID[i], CallbackGettingData);
             }
+        }
+
+        public void CallbackGettingData(String ID)
+        {
+            BeginInvoke(new MethodInvoker(delegate
+            {
+                PProject test = new PProject();
+                test.ToExemplar();
+                Config.Save(test, PList.SelectedProjectFile);
+
+                pictureBox1.Load(PProject.SExtension_ImageURL[ID]);
+            }));
         }
     }
 }

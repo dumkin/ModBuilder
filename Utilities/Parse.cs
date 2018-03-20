@@ -8,12 +8,14 @@ namespace ModBuilder.Extension
 {
     public static class Parse
     {
-        public static void AsyncGetAllData(String ID)
+        public delegate void CallbackGettingData(String ID);
+
+        public static void AsyncGetAllData(String ID, CallbackGettingData Callback)
         {
-            Thread ThreadAsyncGetAllData = new Thread(() => GetAllData(ID));
+            Thread ThreadAsyncGetAllData = new Thread(() => GetAllData(ID, Callback));
             ThreadAsyncGetAllData.Start();
         }
-        public static void GetAllData(String ID)
+        public static void GetAllData(String ID, CallbackGettingData Callback)
         {
             WebClient Client = new WebClient();
             string DOM = Client.DownloadString("http://minecraft.curseforge.com/projects/" + ID + "/files");
@@ -24,9 +26,7 @@ namespace ModBuilder.Extension
             GetType(ID, Query);
             GetImageURL(ID, Query);
 
-            PProject test = new PProject();
-            test.ToExemplar();
-            Project.Config.Save(test, PList.SelectedProjectFile);
+            Callback(ID);
         }
 
 
