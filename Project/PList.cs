@@ -4,11 +4,12 @@ using System.IO;
 
 namespace ModBuilder.Project
 {
-    public static class Projects
+    public class PList
     {
-        public static List<String> Data = new List<String>();
+        public static String SelectedProjectFile;
+        public List<String> Data = new List<String>();
 
-        public static void Repair()
+        public void Repair()
         {
             List<String> NewData = new List<String>();
 

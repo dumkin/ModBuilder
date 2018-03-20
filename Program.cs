@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ModBuilder.GUI;
+using System;
 using System.Windows.Forms;
 
 namespace ModBuilder
@@ -13,7 +14,7 @@ namespace ModBuilder
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form_Project());
+            Application.Run(new Form_Main());
         }
     }
 }

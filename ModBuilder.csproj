@@ -35,6 +35,9 @@
     <StartupObject>ModBuilder.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsQuery, Version=1.3.5.200, Culture=neutral, PublicKeyToken=ab50af63106f043f, processorArchitecture=MSIL">
+      <HintPath>packages\CsQueryLaster.1.3.5.200\lib\CsQuery.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -51,6 +54,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utilities\Parse.cs" />
+    <Compile Include="GUI\Form_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\Form_Main.Designer.cs">
+      <DependentUpon>Form_Main.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Form_Project.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -58,10 +68,13 @@
       <DependentUpon>Form_Project.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
-    <Compile Include="Project\Config.cs" />
-    <Compile Include="Project\Projects.cs" />
-    <Compile Include="Project\Vault.cs" />
+    <Compile Include="Utilities\Config.cs" />
+    <Compile Include="Project\PList.cs" />
+    <Compile Include="Project\PProject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI\Form_Main.resx">
+      <DependentUpon>Form_Main.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Form_Project.resx">
       <DependentUpon>Form_Project.cs</DependentUpon>
     </EmbeddedResource>

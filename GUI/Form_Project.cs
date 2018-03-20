@@ -8,19 +8,21 @@ namespace ModBuilder
 {
     public partial class Form_Project : Form
     {
+        PList ProjectsList = new PList();
+
         public Form_Project()
         {
             InitializeComponent();
 
             if (File.Exists(Directory.GetCurrentDirectory() + "\\projects.json"))
             {
-                Projects.Data = Config.Load<List<String>>(Directory.GetCurrentDirectory() + "\\projects.json");
-                Projects.Repair();
+                ProjectsList.Data = Config.Load<List<String>>(Directory.GetCurrentDirectory() + "\\projects.json");
+                ProjectsList.Repair();
             }
 
-            Config.Save(Projects.Data, Directory.GetCurrentDirectory() + "\\projects.json");
+            Config.Save(ProjectsList.Data, Directory.GetCurrentDirectory() + "\\projects.json");
 
-            foreach (var Item in Projects.Data)
+            foreach (var Item in ProjectsList.Data)
             {
                 ListBox_Projects.Items.Add(Item);
             }
@@ -33,38 +35,49 @@ namespace ModBuilder
 
         private void Button_Delete_Click(object sender, EventArgs e)
         {
+            Enabled = false;
+
             string Path = ListBox_Projects.SelectedItem.ToString();
 
-            Projects.Data.Remove(Path);
+            ProjectsList.Data.Remove(Path);
             ListBox_Projects.Items.RemoveAt(ListBox_Projects.SelectedIndex);
 
-            Config.Save(Projects.Data, Directory.GetCurrentDirectory() + "\\projects.json");
+            Config.Save(ProjectsList.Data, Directory.GetCurrentDirectory() + "\\projects.json");
 
             File.Delete(Path);
+
+            Enabled = true;
         }
 
         private void Button_Load_Click(object sender, EventArgs e)
         {
-            Vault.File = ListBox_Projects.SelectedItem.ToString();
+            Enabled = false;
+
+            PList.SelectedProjectFile = ListBox_Projects.SelectedItem.ToString();
             Hide();
+
+            Enabled = true;
         }
 
         private void Button_New_Click(object sender, EventArgs e)
         {
+            Enabled = false;
+
             if (SaveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                SaveFileDialog.FileName += ".mbp";
+                PList.SelectedProjectFile = SaveFileDialog.FileName + ".mbp";
 
-                ListBox_Projects.Items.Add(SaveFileDialog.FileName);
+                ListBox_Projects.Items.Add(PList.SelectedProjectFile);
+                ProjectsList.Data.Add(PList.SelectedProjectFile);
+                Config.Save(ProjectsList.Data, Directory.GetCurrentDirectory() + "\\projects.json");
 
-                File.Create(SaveFileDialog.FileName);
-                Projects.Data.Add(SaveFileDialog.FileName);
+                PProject EmptyProject = new PProject();
+                Config.Save(EmptyProject, PList.SelectedProjectFile);
 
-                Config.Save(Projects.Data, Directory.GetCurrentDirectory() + "\\projects.json");
-
-                Vault.File = SaveFileDialog.FileName;
                 Hide();
             }
+
+            Enabled = true;
         }
 
         private void ListBox_Projects_SelectedIndexChanged(object sender, EventArgs e)
