@@ -1,6 +1,9 @@
 ﻿using ModBuilder.Extension;
 using ModBuilder.Project;
 using System;
+using System.Drawing;
+using System.IO;
+using System.Net;
 using System.Windows.Forms;
 
 namespace ModBuilder.GUI
@@ -38,7 +41,17 @@ namespace ModBuilder.GUI
                 test.ToExemplar();
                 Config.Save(test, PList.SelectedProjectFile);
 
-                pictureBox1.Load(PProject.SExtension_ImageURL[ID]);
+                WebClient wc = new WebClient();
+                byte[] bytes = wc.DownloadData(PProject.SExtension_ImageURL[ID]);
+                MemoryStream ms = new MemoryStream(bytes);
+                Image img = Image.FromStream(ms);
+
+                ImageList_Main.Images.Add(ID, img);
+                // ImageList_Main.Images.Add(key: ID, image: img);
+                //listView1.View = View.Details; // Enables Details view so you can see columns
+
+
+                listView1.Items.Add(new ListViewItem { Name = ID, ImageKey = ID, Text = PProject.SExtension_Name[ID] }); // Using object initializer to add the text
             }));
         }
     }
