@@ -29,22 +29,26 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.ListView_Main = new System.Windows.Forms.ListView();
             this.ImageList_Main = new System.Windows.Forms.ImageList(this.components);
+            this.ContextMenuStrip_Main = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.ContextMenuStrip_Main.SuspendLayout();
             this.SuspendLayout();
             // 
-            // listView1
+            // ListView_Main
             // 
-            this.listView1.LargeImageList = this.ImageList_Main;
-            this.listView1.Location = new System.Drawing.Point(12, 12);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(294, 417);
-            this.listView1.SmallImageList = this.ImageList_Main;
-            this.listView1.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.listView1.StateImageList = this.ImageList_Main;
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.List;
+            this.ListView_Main.LargeImageList = this.ImageList_Main;
+            this.ListView_Main.Location = new System.Drawing.Point(12, 12);
+            this.ListView_Main.Name = "ListView_Main";
+            this.ListView_Main.Size = new System.Drawing.Size(294, 417);
+            this.ListView_Main.SmallImageList = this.ImageList_Main;
+            this.ListView_Main.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.ListView_Main.StateImageList = this.ImageList_Main;
+            this.ListView_Main.TabIndex = 0;
+            this.ListView_Main.UseCompatibleStateImageBehavior = false;
+            this.ListView_Main.View = System.Windows.Forms.View.List;
+            this.ListView_Main.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ListView_Main_MouseClick);
             // 
             // ImageList_Main
             // 
@@ -52,21 +56,37 @@
             this.ImageList_Main.ImageSize = new System.Drawing.Size(64, 64);
             this.ImageList_Main.TransparentColor = System.Drawing.Color.Transparent;
             // 
+            // ContextMenuStrip_Main
+            // 
+            this.ContextMenuStrip_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem});
+            this.ContextMenuStrip_Main.Name = "ContextMenuStrip_Main";
+            this.ContextMenuStrip_Main.Size = new System.Drawing.Size(181, 48);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 441);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.ListView_Main);
             this.Name = "Form_Main";
             this.Text = "Main - ModBuilder";
+            this.ContextMenuStrip_Main.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView ListView_Main;
         private System.Windows.Forms.ImageList ImageList_Main;
+        private System.Windows.Forms.ContextMenuStrip ContextMenuStrip_Main;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }

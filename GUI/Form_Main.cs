@@ -35,24 +35,34 @@ namespace ModBuilder.GUI
 
         public void CallbackGettingData(String ID)
         {
+            /*PProject test = new PProject();
+            test.ToExemplar();
+            Config.Save(test, PList.SelectedProjectFile);*/
+
+            WebClient wc = new WebClient();
+            byte[] bytes = wc.DownloadData(PProject.SExtension_ImageURL[ID]);
+            MemoryStream ms = new MemoryStream(bytes);
+            Image img = Image.FromStream(ms);
+
             BeginInvoke(new MethodInvoker(delegate
             {
-                PProject test = new PProject();
-                test.ToExemplar();
-                Config.Save(test, PList.SelectedProjectFile);
-
-                WebClient wc = new WebClient();
-                byte[] bytes = wc.DownloadData(PProject.SExtension_ImageURL[ID]);
-                MemoryStream ms = new MemoryStream(bytes);
-                Image img = Image.FromStream(ms);
-
                 ImageList_Main.Images.Add(ID, img);
                 // ImageList_Main.Images.Add(key: ID, image: img);
                 //listView1.View = View.Details; // Enables Details view so you can see columns
 
-
-                listView1.Items.Add(new ListViewItem { Name = ID, ImageKey = ID, Text = PProject.SExtension_Name[ID] }); // Using object initializer to add the text
+                ListView_Main.Items.Add(new ListViewItem { Name = ID, ImageKey = ID, Text = PProject.SExtension_Name[ID] }); // Using object initializer to add the text
             }));
+        }
+
+        private void ListView_Main_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right && ListView_Main.SelectedIndices.Count > 0)
+            {
+                if (ListView_Main.FocusedItem.Bounds.Contains(e.Location) == true)
+                {
+                    ContextMenuStrip_Main.Show(Cursor.Position);
+                }
+            }
         }
     }
 }
