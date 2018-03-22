@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
-using ModBuilder.Project;
+using ModBuilder.ProjectSystem;
+using ModBuilder.Utilities;
 
 namespace ModBuilder
 {
     public partial class Form_Project : Form
     {
-        PList ProjectsList = new PList();
+        Projects Projects = new Projects();
 
         public Form_Project()
         {
@@ -16,35 +16,37 @@ namespace ModBuilder
 
             if (File.Exists(Directory.GetCurrentDirectory() + "\\projects.json"))
             {
-                ProjectsList.Data = Config.Load<List<String>>(Directory.GetCurrentDirectory() + "\\projects.json");
-                ProjectsList.Repair();
+                Projects = Config.Load<Projects>(Directory.GetCurrentDirectory() + "\\projects.json");
+
+                if (!Projects.Valid())
+                {
+                    Projects.Repair();
+                    Config.Save(Projects, Directory.GetCurrentDirectory() + "\\projects.json");
+                }
+            }
+            else
+            {
+                Config.Save(Projects, Directory.GetCurrentDirectory() + "\\projects.json");
             }
 
-            Config.Save(ProjectsList.Data, Directory.GetCurrentDirectory() + "\\projects.json");
-
-            foreach (var Item in ProjectsList.Data)
+            foreach (var Item in Projects.Files)
             {
                 ListBox_Projects.Items.Add(Item);
             }
-        }
-
-        private void Form_Project_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
         }
 
         private void Button_Delete_Click(object sender, EventArgs e)
         {
             Enabled = false;
 
-            string Path = ListBox_Projects.SelectedItem.ToString();
+            String Path = ListBox_Projects.SelectedItem.ToString();
 
-            ProjectsList.Data.Remove(Path);
-            ListBox_Projects.Items.RemoveAt(ListBox_Projects.SelectedIndex);
-
-            Config.Save(ProjectsList.Data, Directory.GetCurrentDirectory() + "\\projects.json");
+            Projects.Files.Remove(Path);
+            Config.Save(Projects.Files, Directory.GetCurrentDirectory() + "\\projects.json");
 
             File.Delete(Path);
+
+            ListBox_Projects.Items.RemoveAt(ListBox_Projects.SelectedIndex);
 
             Enabled = true;
         }
@@ -53,7 +55,7 @@ namespace ModBuilder
         {
             Enabled = false;
 
-            PList.SelectedProjectFile = ListBox_Projects.SelectedItem.ToString();
+            Projects.SelectedProjectFile = ListBox_Projects.SelectedItem.ToString();
             Hide();
 
             Enabled = true;
@@ -65,14 +67,15 @@ namespace ModBuilder
 
             if (SaveFileDialog.ShowDialog() == DialogResult.OK)
             {
-                PList.SelectedProjectFile = SaveFileDialog.FileName + ".mbp";
+                Projects.SelectedProjectFile = SaveFileDialog.FileName + ".mbp";
 
-                ListBox_Projects.Items.Add(PList.SelectedProjectFile);
-                ProjectsList.Data.Add(PList.SelectedProjectFile);
-                Config.Save(ProjectsList.Data, Directory.GetCurrentDirectory() + "\\projects.json");
+                Projects.Files.Add(Projects.SelectedProjectFile);
+                Config.Save(Projects, Directory.GetCurrentDirectory() + "\\projects.json");
 
-                PProject EmptyProject = new PProject();
-                Config.Save(EmptyProject, PList.SelectedProjectFile);
+                Project EmptyProject = new Project();
+                Config.Save(EmptyProject, Projects.SelectedProjectFile);
+
+                ListBox_Projects.Items.Add(Projects.SelectedProjectFile);
 
                 Hide();
             }

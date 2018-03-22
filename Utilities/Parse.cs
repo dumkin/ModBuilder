@@ -1,10 +1,12 @@
 ﻿using CsQuery;
-using ModBuilder.Project;
+using ModBuilder.ProjectSystem;
 using System;
+using System.Drawing;
+using System.IO;
 using System.Net;
 using System.Threading;
 
-namespace ModBuilder.Extension
+namespace ModBuilder.Utilities
 {
     public static class Parse
     {
@@ -26,46 +28,40 @@ namespace ModBuilder.Extension
             GetType(ID, Query);
             GetImageURL(ID, Query);
 
+            GetImage(ID);
+
             Callback(ID);
         }
 
-
-        /*public static void AsyncGetName(String ID, CQ Query)
-        {
-            Thread ThreadAsyncGetName = new Thread(() => GetName(ID, Query));
-            ThreadAsyncGetName.Start();
-        }*/
         public static void GetName(String ID, CQ Query)
         {
             String Name = Query["span.overflow-tip"].Text();
 
-            PProject.SExtension_Name[ID] = Name;
+            Project.Extension[ID].Name = Name;
         }
 
-
-        /*public static void AsyncGetType(String ID, CQ Query)
-        {
-            Thread ThreadAsyncGetType = new Thread(() => GetType(ID, Query));
-            ThreadAsyncGetType.Start();
-        }*/
         public static void GetType(String ID, CQ Query)
         {
             String Type = Query["h2.RootGameCategory > a"].Text();
 
-            PProject.SExtension_Type[ID] = Type;
+            Project.Extension[ID].Type = Type;
         }
 
-
-        /*public static void AsyncGetImageURL(String ID, CQ Query)
-        {
-            Thread ThreadAsyncGetImageURL = new Thread(() => GetImageURL(ID, Query));
-            ThreadAsyncGetImageURL.Start();
-        }*/
         public static void GetImageURL(String ID, CQ Query)
         {
             String ImageURL = Query["a.e-avatar64"].Attr("href");
 
-            PProject.SExtension_ImageURL[ID] = ImageURL;
+            Project.Extension[ID].ImageURL = ImageURL;
+        }
+
+        public static void GetImage(String ID)
+        {
+            WebClient wc = new WebClient();
+            byte[] bytes = wc.DownloadData(Project.Extension[ID].ImageURL);
+            MemoryStream ms = new MemoryStream(bytes);
+            Image Image = Image.FromStream(ms);
+
+            Project.Extension[ID].Image = Image;
         }
     }
 }

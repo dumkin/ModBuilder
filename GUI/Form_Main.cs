@@ -1,16 +1,14 @@
-﻿using ModBuilder.Extension;
-using ModBuilder.Project;
+﻿using ModBuilder.ProjectSystem;
+using ModBuilder.Utilities;
 using System;
-using System.Drawing;
 using System.IO;
-using System.Net;
 using System.Windows.Forms;
 
 namespace ModBuilder.GUI
 {
     public partial class Form_Main : Form
     {
-        PProject Project;
+        Project Project;
 
         public Form_Main()
         {
@@ -19,38 +17,56 @@ namespace ModBuilder.GUI
             var Form_Project = new Form_Project();
             Form_Project.ShowDialog();
 
-            Project = Config.Load<PProject>(PList.SelectedProjectFile);
-            Project.ToStatic();
-
-            // PProject.SExtension_ID.Add("journeymap");
-
-            // Project.ToExemplar();
-            // Config.Save(Project, PList.SelectedProjectFile);
-            
-            for (var i = 0; i < PProject.SExtension_ID.Count; i++)
+            if (!File.Exists(Projects.SelectedProjectFile))
             {
-                Parse.AsyncGetAllData(PProject.SExtension_ID[i], CallbackGettingData);
+                Environment.Exit(0);
+            }
+
+            Project = Config.Load<Project>(Projects.SelectedProjectFile);
+
+            LoadCache();
+            CheckCache();
+        }
+
+        public void LoadCache()
+        {
+            Enabled = false;
+
+            foreach (var Item in Project.Extension)
+            {
+                ListView_Main.Items.Add(new ListViewItem { Name = Item.Key, ImageKey = Item.Key, Text = Item.Value.Name });
+            }
+
+            Enabled = true;
+        }
+
+        public void CheckCache()
+        {
+            foreach (var Item in Project.Extension)
+            {
+               Parse.AsyncGetAllData(Item.Key, CallbackCheckingCache);
             }
         }
 
-        public void CallbackGettingData(String ID)
+        public void CallbackCheckingCache(String ID)
         {
-            /*PProject test = new PProject();
-            test.ToExemplar();
-            Config.Save(test, PList.SelectedProjectFile);*/
+            Project.CountCheckedCache++;
 
-            WebClient wc = new WebClient();
-            byte[] bytes = wc.DownloadData(PProject.SExtension_ImageURL[ID]);
-            MemoryStream ms = new MemoryStream(bytes);
-            Image img = Image.FromStream(ms);
+            if (Project.CountCheckedCache == Project.Extension.Count)
+            {
+                Config.Save(Project, Projects.SelectedProjectFile);
+
+                /*
+                BeginInvoke(new MethodInvoker(delegate
+                {
+                    Enabled = true;
+                }));
+                */
+            }
 
             BeginInvoke(new MethodInvoker(delegate
             {
-                ImageList_Main.Images.Add(ID, img);
-                // ImageList_Main.Images.Add(key: ID, image: img);
-                //listView1.View = View.Details; // Enables Details view so you can see columns
-
-                ListView_Main.Items.Add(new ListViewItem { Name = ID, ImageKey = ID, Text = PProject.SExtension_Name[ID] }); // Using object initializer to add the text
+                ImageList_Main.Images.Add(ID, Project.Extension[ID].Image);
             }));
         }
 

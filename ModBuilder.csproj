@@ -54,6 +54,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ProjectSystem\Extension.cs" />
     <Compile Include="Utilities\Parse.cs" />
     <Compile Include="GUI\Form_Main.cs">
       <SubType>Form</SubType>
@@ -69,8 +70,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Utilities\Config.cs" />
-    <Compile Include="Project\PList.cs" />
-    <Compile Include="Project\PProject.cs" />
+    <Compile Include="ProjectSystem\Projects.cs" />
+    <Compile Include="ProjectSystem\Project.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="GUI\Form_Main.resx">
       <DependentUpon>Form_Main.cs</DependentUpon>

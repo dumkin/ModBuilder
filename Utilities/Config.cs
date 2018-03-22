@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
 
-namespace ModBuilder.Project
+namespace ModBuilder.Utilities
 {
     public static class Config
     {

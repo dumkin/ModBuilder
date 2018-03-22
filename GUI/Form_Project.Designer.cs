@@ -88,7 +88,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form_Project";
             this.Text = "Projects - ModBuilder";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form_Project_FormClosed);
             this.ResumeLayout(false);
 
         }
