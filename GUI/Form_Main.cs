@@ -24,6 +24,29 @@ namespace ModBuilder.GUI
 
             Project = Config.Load<Project>(Projects.SelectedProjectFile);
 
+            /*
+            Project.Extension.Add("actually-additions", new Extension { });
+            Project.Extension.Add("ambientsounds", new Extension { });
+            Project.Extension.Add("applied-energistics-2", new Extension { });
+            Project.Extension.Add("chunk-animator", new Extension { });
+            Project.Extension.Add("deep-resonance", new Extension { });
+            Project.Extension.Add("fast-leaf-decay", new Extension { });
+            Project.Extension.Add("immersive-engineering", new Extension { });
+            Project.Extension.Add("industrial-craft", new Extension { });
+            Project.Extension.Add("itemphysic", new Extension { });
+            Project.Extension.Add("journeymap", new Extension { });
+            Project.Extension.Add("jei", new Extension { });
+            Project.Extension.Add("just-enough-resources-jer", new Extension { });
+            Project.Extension.Add("malisisdoors", new Extension { });
+            Project.Extension.Add("minecolonies", new Extension { });
+            Project.Extension.Add("more-overlays", new Extension { });
+            Project.Extension.Add("mouse-tweaks", new Extension { });
+            Project.Extension.Add("platforms", new Extension { });
+            Project.Extension.Add("storage-drawers", new Extension { });
+            Project.Extension.Add("the-one-probe", new Extension { });
+            Project.Extension.Add("tinkers-construct", new Extension { });
+            */
+
             LoadCache();
             CheckCache();
         }
