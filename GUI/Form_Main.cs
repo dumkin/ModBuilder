@@ -34,11 +34,16 @@ namespace ModBuilder.GUI
 
             foreach (var Item in Project.Extension)
             {
-                Project.List[Item.Value.Name] = Item.Key;
-                ListBox_Main.Items.Add(Item.Value.Name);
+                AddItem(Item.Key, Item.Value.Name);
             }
-            
+
             Enabled = true;
+        }
+
+        public void AddItem(String ID, String Name)
+        {
+            Project.List[Name] = ID;
+            ListBox_Main.Items.Add(Name);
         }
 
         public void CheckCache()
@@ -47,6 +52,15 @@ namespace ModBuilder.GUI
             {
                Parse.AsyncGetAllData(Item.Key, CallbackCheckingCache);
             }
+        }
+
+        public void AddCache(String ID, String Name)
+        {
+            Project.Extension.Add(ID, new Extension { });
+
+            AddItem(ID, Name);
+
+            Parse.AsyncGetAllData(ID, CallbackCheckingCache);
         }
 
         public void CallbackCheckingCache(String ID)
@@ -99,12 +113,17 @@ namespace ModBuilder.GUI
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var index = listBox1.SelectedIndex;
+            /*var index = listBox1.SelectedIndex;
 
             if (index >= 0)
             {
                 MessageBox.Show(Project.Search[listBox1.SelectedItem.ToString()]);
-            }
+            }*/
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            AddCache(Project.Search[listBox1.SelectedItem.ToString()], listBox1.SelectedItem.ToString());
         }
     }
 }

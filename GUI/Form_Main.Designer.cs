@@ -34,6 +34,7 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.ListBox_Main = new System.Windows.Forms.ListBox();
             this.Label_Type = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox_Main)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,7 +49,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(405, 294);
+            this.textBox1.Location = new System.Drawing.Point(405, 276);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(175, 20);
             this.textBox1.TabIndex = 2;
@@ -56,18 +57,18 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(586, 292);
+            this.button1.Location = new System.Drawing.Point(586, 274);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(26, 23);
             this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
+            this.button1.Text = "S";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(405, 321);
+            this.listBox1.Location = new System.Drawing.Point(405, 303);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(207, 108);
             this.listBox1.TabIndex = 4;
@@ -92,11 +93,22 @@
             this.Label_Type.TabIndex = 6;
             this.Label_Type.Text = "Type";
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(537, 417);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 7;
+            this.button2.Text = "Add";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.Label_Type);
             this.Controls.Add(this.ListBox_Main);
             this.Controls.Add(this.listBox1);
@@ -118,5 +130,6 @@
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ListBox ListBox_Main;
         private System.Windows.Forms.Label Label_Type;
+        private System.Windows.Forms.Button button2;
     }
 }
