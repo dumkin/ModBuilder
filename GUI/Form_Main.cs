@@ -1,7 +1,9 @@
 ﻿using ModBuilder.ProjectSystem;
 using ModBuilder.Utilities;
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace ModBuilder.GUI
@@ -93,6 +95,8 @@ namespace ModBuilder.GUI
             if (Project.CountCheckedCache == Project.Extension.Count)
             {
                 Config.Save(Project, Projects.SelectedProjectFile);
+
+                GenerateAvailableVersions();
             }
         }
 
@@ -105,6 +109,31 @@ namespace ModBuilder.GUI
                 PictureBox_Main.Image = Project.Extension[ID].Image;
                 Label_Type.Text = Project.Extension[ID].Type;
             }
+        }
+
+        public void GenerateAvailableVersions()
+        {
+            Project.AvailableVersions.Clear();
+            var Cleared = true;
+
+            foreach (var Item in Project.Extension)
+            {
+                if (Cleared)
+                {
+                    Project.AvailableVersions = Item.Value.Versions;
+
+                    Cleared = false;
+                }
+                else
+                {
+                    AddAvailableVersions(Item.Key);
+                }
+            }
+        }
+
+        public void AddAvailableVersions(String ID)
+        {
+            Project.AvailableVersions = Project.AvailableVersions.Intersect(Project.Extension[ID].Versions).ToList();
         }
 
         /*
@@ -165,6 +194,15 @@ namespace ModBuilder.GUI
         {
             listBox1.Items.Clear();
             foreach (var item in Project.CodeVersions)
+            {
+                listBox1.Items.Add(item);
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            foreach (var item in Project.AvailableVersions)
             {
                 listBox1.Items.Add(item);
             }
