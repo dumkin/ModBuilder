@@ -4,6 +4,7 @@ using System;
 using System.Drawing;
 using System.IO;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Threading;
 
 namespace ModBuilder.Utilities
@@ -25,6 +26,7 @@ namespace ModBuilder.Utilities
 
             GetName(ID, Query);
             GetType(ID, Query);
+            GetVersions(ID, Query);
             GetImageURL(ID, Query);
 
             GetImage(ID);
@@ -44,6 +46,35 @@ namespace ModBuilder.Utilities
             var Type = Query["h2.RootGameCategory > a"].Text();
 
             Project.Extension[ID].Type = Type;
+        }
+
+        public static void GetVersions(String ID, CQ Query)
+        {
+            var Options = Query["select#filter-game-version > option"];
+
+            foreach (var Item in Options)
+            {
+                var FindAll = new Regex("All");
+                var FindMinecraft = new Regex("Minecraft");
+
+                if (FindAll.IsMatch(Item.TextContent) || FindMinecraft.IsMatch(Item.TextContent))
+                {
+                    continue;
+                }
+
+                var FindJava = new Regex("Java");
+
+                if (FindJava.IsMatch(Item.TextContent))
+                {
+                    break;
+                }
+
+                var OnlyVersion = new Regex("[^0-9.]");
+                var Text = OnlyVersion.Replace(Item.TextContent, "");
+
+                Project.Extension[ID].Versions.Add(Text);
+                Project.CodeVersions[Text] = Item.GetAttribute("value");
+            }
         }
 
         public static void GetImageURL(String ID, CQ Query)

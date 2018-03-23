@@ -125,5 +125,26 @@ namespace ModBuilder.GUI
         {
             AddCache(Project.Search[listBox1.SelectedItem.ToString()], listBox1.SelectedItem.ToString());
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var ID = Project.List[ListBox_Main.SelectedItem.ToString()];
+
+            listBox1.Items.Clear();
+            //MessageBox.Show(Project.Extension[ID].Versions.ToString());
+            foreach (var item in Project.Extension[ID].Versions)
+            {
+                listBox1.Items.Add(item);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Clear();
+            foreach (var item in Project.CodeVersions)
+            {
+                listBox1.Items.Add(item);
+            }
+        }
     }
 }

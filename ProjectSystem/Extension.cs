@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace ModBuilder.ProjectSystem
@@ -17,5 +18,7 @@ namespace ModBuilder.ProjectSystem
         public String ImageURL;
 
         public Image Image;
+
+        public List<String> Versions = new List<String>();
     }
 }
