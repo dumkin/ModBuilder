@@ -40,6 +40,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.FolderBrowserDialog_Download = new System.Windows.Forms.FolderBrowserDialog();
+            this.ListBox_Dep = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox_Main)).BeginInit();
             this.SuspendLayout();
             // 
@@ -148,11 +149,20 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
+            // ListBox_Dep
+            // 
+            this.ListBox_Dep.FormattingEnabled = true;
+            this.ListBox_Dep.Location = new System.Drawing.Point(384, 45);
+            this.ListBox_Dep.Name = "ListBox_Dep";
+            this.ListBox_Dep.Size = new System.Drawing.Size(228, 212);
+            this.ListBox_Dep.TabIndex = 12;
+            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.ListBox_Dep);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -185,5 +195,6 @@
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.FolderBrowserDialog FolderBrowserDialog_Download;
+        private System.Windows.Forms.ListBox ListBox_Dep;
     }
 }

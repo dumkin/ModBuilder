@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Windows.Forms;
 
 namespace ModBuilder.Utilities
 {
@@ -31,6 +32,8 @@ namespace ModBuilder.Utilities
             GetImageURL(ID, Query);
 
             GetImage(ID);
+
+            GetDependencies(ID);
 
             Callback(ID);
         }
@@ -93,6 +96,25 @@ namespace ModBuilder.Utilities
             var ImageSource = Image.FromStream(ms);
 
             Project.Extension[ID].Image = ImageSource;
+        }
+
+        public static void GetDependencies(String ID)
+        {
+            var Client = new WebClient();
+            var DOM = Client.DownloadString("https://minecraft.curseforge.com/projects/" + ID + "/relations/dependencies?filter-related-dependencies=3");
+
+            var Query = CQ.Create(DOM)["div.name-wrapper.overflow-tip > a"];
+
+            foreach (var Item in Query)
+            {
+                var URL = Item.GetAttribute("href");
+                var ExtensionID = URL.Split('/')[4];
+
+                if (!Project.Extension.ContainsKey(ExtensionID))
+                {
+                    Project.Dependencies[ExtensionID] = new Extension { };
+                }
+            }
         }
 
         public delegate void CallbackSearch();

@@ -94,6 +94,14 @@ namespace ModBuilder.GUI
             {
                 Config.Save(Project, Projects.SelectedProjectFile);
 
+                BeginInvoke(new MethodInvoker(delegate
+                {
+                    foreach (var Item in Project.Dependencies)
+                    {
+                        ListBox_Dep.Items.Add(Item.Key);
+                    }
+                }));
+
                 Parse.GenerateAvailableVersions();
             }
         }
@@ -207,11 +215,6 @@ namespace ModBuilder.GUI
                     Enabled = true;
                 }));
             }
-
-            /*BeginInvoke(new MethodInvoker(delegate
-            {
-                //textBox1.Text = Project.Extension[ID].FileURL;
-            }));*/
         }
     }
 }
