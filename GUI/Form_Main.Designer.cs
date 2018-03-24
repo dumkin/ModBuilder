@@ -42,22 +42,22 @@
             this.Dependencies_List = new System.Windows.Forms.ListBox();
             this.Search_Group = new System.Windows.Forms.GroupBox();
             this.Selected_Group = new System.Windows.Forms.GroupBox();
+            this.Selected_Control_Group = new System.Windows.Forms.GroupBox();
+            this.Selected_Control_Delete = new System.Windows.Forms.Button();
+            this.Selected_Available_Group = new System.Windows.Forms.GroupBox();
+            this.Selected_Available_List = new System.Windows.Forms.ListBox();
             this.Selected_Name = new System.Windows.Forms.Label();
             this.Build_Group = new System.Windows.Forms.GroupBox();
             this.Dependencies_Group = new System.Windows.Forms.GroupBox();
             this.Control_Group = new System.Windows.Forms.GroupBox();
-            this.Selected_Available_List = new System.Windows.Forms.ListBox();
-            this.Selected_Available_Group = new System.Windows.Forms.GroupBox();
-            this.Selected_Control_Group = new System.Windows.Forms.GroupBox();
-            this.Selected_Control_Delete = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Selected_Image)).BeginInit();
             this.Search_Group.SuspendLayout();
             this.Selected_Group.SuspendLayout();
+            this.Selected_Control_Group.SuspendLayout();
+            this.Selected_Available_Group.SuspendLayout();
             this.Build_Group.SuspendLayout();
             this.Dependencies_Group.SuspendLayout();
             this.Control_Group.SuspendLayout();
-            this.Selected_Available_Group.SuspendLayout();
-            this.Selected_Control_Group.SuspendLayout();
             this.SuspendLayout();
             // 
             // Selected_Image
@@ -206,6 +206,50 @@
             this.Selected_Group.TabStop = false;
             this.Selected_Group.Text = "Selected extension:";
             // 
+            // Selected_Control_Group
+            // 
+            this.Selected_Control_Group.Controls.Add(this.Selected_Control_Delete);
+            this.Selected_Control_Group.Location = new System.Drawing.Point(343, 153);
+            this.Selected_Control_Group.Name = "Selected_Control_Group";
+            this.Selected_Control_Group.Size = new System.Drawing.Size(155, 180);
+            this.Selected_Control_Group.TabIndex = 10;
+            this.Selected_Control_Group.TabStop = false;
+            this.Selected_Control_Group.Text = "Selected control:";
+            // 
+            // Selected_Control_Delete
+            // 
+            this.Selected_Control_Delete.Location = new System.Drawing.Point(6, 19);
+            this.Selected_Control_Delete.Name = "Selected_Control_Delete";
+            this.Selected_Control_Delete.Size = new System.Drawing.Size(75, 23);
+            this.Selected_Control_Delete.TabIndex = 0;
+            this.Selected_Control_Delete.Text = "Delete";
+            this.Selected_Control_Delete.UseVisualStyleBackColor = true;
+            this.Selected_Control_Delete.Click += new System.EventHandler(this.Selected_Control_Delete_Click);
+            // 
+            // Selected_Available_Group
+            // 
+            this.Selected_Available_Group.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.Selected_Available_Group.Controls.Add(this.Selected_Available_List);
+            this.Selected_Available_Group.Location = new System.Drawing.Point(6, 153);
+            this.Selected_Available_Group.Name = "Selected_Available_Group";
+            this.Selected_Available_Group.Size = new System.Drawing.Size(128, 180);
+            this.Selected_Available_Group.TabIndex = 9;
+            this.Selected_Available_Group.TabStop = false;
+            this.Selected_Available_Group.Text = "Available versions:";
+            // 
+            // Selected_Available_List
+            // 
+            this.Selected_Available_List.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Selected_Available_List.FormattingEnabled = true;
+            this.Selected_Available_List.Location = new System.Drawing.Point(10, 19);
+            this.Selected_Available_List.Name = "Selected_Available_List";
+            this.Selected_Available_List.Size = new System.Drawing.Size(112, 147);
+            this.Selected_Available_List.Sorted = true;
+            this.Selected_Available_List.TabIndex = 8;
+            // 
             // Selected_Name
             // 
             this.Selected_Name.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -249,50 +293,6 @@
             this.Control_Group.TabStop = false;
             this.Control_Group.Text = "Build control:";
             // 
-            // Selected_Available_List
-            // 
-            this.Selected_Available_List.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.Selected_Available_List.FormattingEnabled = true;
-            this.Selected_Available_List.Location = new System.Drawing.Point(10, 19);
-            this.Selected_Available_List.Name = "Selected_Available_List";
-            this.Selected_Available_List.Size = new System.Drawing.Size(112, 147);
-            this.Selected_Available_List.Sorted = true;
-            this.Selected_Available_List.TabIndex = 8;
-            // 
-            // Selected_Available_Group
-            // 
-            this.Selected_Available_Group.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-            this.Selected_Available_Group.Controls.Add(this.Selected_Available_List);
-            this.Selected_Available_Group.Location = new System.Drawing.Point(6, 153);
-            this.Selected_Available_Group.Name = "Selected_Available_Group";
-            this.Selected_Available_Group.Size = new System.Drawing.Size(128, 180);
-            this.Selected_Available_Group.TabIndex = 9;
-            this.Selected_Available_Group.TabStop = false;
-            this.Selected_Available_Group.Text = "Available versions:";
-            // 
-            // Selected_Control_Group
-            // 
-            this.Selected_Control_Group.Controls.Add(this.Selected_Control_Delete);
-            this.Selected_Control_Group.Location = new System.Drawing.Point(343, 153);
-            this.Selected_Control_Group.Name = "Selected_Control_Group";
-            this.Selected_Control_Group.Size = new System.Drawing.Size(155, 180);
-            this.Selected_Control_Group.TabIndex = 10;
-            this.Selected_Control_Group.TabStop = false;
-            this.Selected_Control_Group.Text = "Selected control:";
-            // 
-            // Selected_Control_Delete
-            // 
-            this.Selected_Control_Delete.Location = new System.Drawing.Point(6, 19);
-            this.Selected_Control_Delete.Name = "Selected_Control_Delete";
-            this.Selected_Control_Delete.Size = new System.Drawing.Size(75, 23);
-            this.Selected_Control_Delete.TabIndex = 0;
-            this.Selected_Control_Delete.Text = "Delete";
-            this.Selected_Control_Delete.UseVisualStyleBackColor = true;
-            this.Selected_Control_Delete.Click += new System.EventHandler(this.Selected_Control_Delete_Click);
-            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -303,6 +303,7 @@
             this.Controls.Add(this.Build_Group);
             this.Controls.Add(this.Selected_Group);
             this.Controls.Add(this.Search_Group);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "Form_Main";
             this.Text = "Main - ModBuilder";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Main_FormClosing);
@@ -311,11 +312,11 @@
             this.Search_Group.PerformLayout();
             this.Selected_Group.ResumeLayout(false);
             this.Selected_Group.PerformLayout();
+            this.Selected_Control_Group.ResumeLayout(false);
+            this.Selected_Available_Group.ResumeLayout(false);
             this.Build_Group.ResumeLayout(false);
             this.Dependencies_Group.ResumeLayout(false);
             this.Control_Group.ResumeLayout(false);
-            this.Selected_Available_Group.ResumeLayout(false);
-            this.Selected_Control_Group.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
