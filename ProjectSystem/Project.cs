@@ -17,5 +17,6 @@ namespace ModBuilder.ProjectSystem
         public static Dictionary<String, String> Search = new Dictionary<String, String>();
 
         public static int CountCheckedCache = 0;
+        public static int CountDownload = 0;
     }
 }

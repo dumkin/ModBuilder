@@ -183,16 +183,35 @@ namespace ModBuilder.GUI
 
         private void button6_Click(object sender, EventArgs e)
         {
-            var ID = Project.List[ListBox_Main.SelectedItem.ToString()];
-            Parse.AsyncDownload(ID, listBox1.SelectedItem.ToString(), DownloadCallback);
+            if (FolderBrowserDialog_Download.ShowDialog() == DialogResult.OK)
+            {
+                Enabled = false;
+
+                Project.CountDownload = 0;
+
+                foreach (var Item in Project.Extension)
+                {
+                    Parse.AsyncDownload(Item.Key, listBox1.SelectedItem.ToString(), FolderBrowserDialog_Download.SelectedPath, DownloadCallback);
+                }
+            }
         }
 
         public void DownloadCallback(String ID)
         {
-            BeginInvoke(new MethodInvoker(delegate
+            Project.CountDownload++;
+
+            if (Project.CountDownload == Project.Extension.Count)
             {
-                textBox1.Text = Project.Extension[ID].FileURL;
-            }));
+                BeginInvoke(new MethodInvoker(delegate
+                {
+                    Enabled = true;
+                }));
+            }
+
+            /*BeginInvoke(new MethodInvoker(delegate
+            {
+                //textBox1.Text = Project.Extension[ID].FileURL;
+            }));*/
         }
     }
 }

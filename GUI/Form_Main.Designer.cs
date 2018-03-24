@@ -39,6 +39,7 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.FolderBrowserDialog_Download = new System.Windows.Forms.FolderBrowserDialog();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBox_Main)).BeginInit();
             this.SuspendLayout();
             // 
@@ -183,5 +184,6 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.FolderBrowserDialog FolderBrowserDialog_Download;
     }
 }

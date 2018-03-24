@@ -146,14 +146,17 @@ namespace ModBuilder.Utilities
         }
 
         public delegate void CallbackDownload(String ID);
-        public static void AsyncDownload(String ID, String SelectedVersion, CallbackDownload Callback)
+        public static void AsyncDownload(String ID, String SelectedVersion, String Folder, CallbackDownload Callback)
         {
-            var ThreadAsyncDownload = new Thread(() => Download(ID, SelectedVersion, Callback));
+            var ThreadAsyncDownload = new Thread(() => Download(ID, SelectedVersion, Folder, Callback));
             ThreadAsyncDownload.Start();
         }
-        public static void Download(String ID, String SelectedVersion, CallbackDownload Callback)
+        public static void Download(String ID, String SelectedVersion, String Folder, CallbackDownload Callback)
         {
             PrepareDownload(ID, SelectedVersion);
+
+            var Client = new WebClient();
+            Client.DownloadFile(Project.Extension[ID].FileURL, Folder + "\\" + Project.Extension[ID].FileName);
 
             Callback(ID);
         }
@@ -185,8 +188,8 @@ namespace ModBuilder.Utilities
         {
             var ExplodeURL = URL.Split('/');
 
-            var FirstCode = ExplodeURL[6].Substring(0, 4);
-            var SecondCode = ExplodeURL[6].Substring(4);
+            var FirstCode = Int32.Parse(ExplodeURL[6].Substring(0, 4));
+            var SecondCode = Int32.Parse(ExplodeURL[6].Substring(4));
 
             Project.Extension[ID].FileURL = "https://addons-origin.cursecdn.com/files/" + FirstCode + "/" + SecondCode + "/" + Project.Extension[ID].FileName;
         }
