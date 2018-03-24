@@ -28,90 +28,117 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.PictureBox_Main = new System.Windows.Forms.PictureBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.ListBox_Main = new System.Windows.Forms.ListBox();
-            this.Label_Type = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.Selected_Image = new System.Windows.Forms.PictureBox();
+            this.Search_Edit = new System.Windows.Forms.TextBox();
+            this.Search_Find = new System.Windows.Forms.Button();
+            this.Search_List = new System.Windows.Forms.ListBox();
+            this.Build_List = new System.Windows.Forms.ListBox();
+            this.Selected_Type = new System.Windows.Forms.Label();
+            this.Search_Add = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
-            this.FolderBrowserDialog_Download = new System.Windows.Forms.FolderBrowserDialog();
-            this.ListBox_Dep = new System.Windows.Forms.ListBox();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox_Main)).BeginInit();
+            this.Download_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+            this.Dependencies_List = new System.Windows.Forms.ListBox();
+            this.Search_Group = new System.Windows.Forms.GroupBox();
+            this.Selected_Group = new System.Windows.Forms.GroupBox();
+            this.Selected_Name = new System.Windows.Forms.Label();
+            this.Build_Group = new System.Windows.Forms.GroupBox();
+            this.Dependencies_Group = new System.Windows.Forms.GroupBox();
+            this.Control_Group = new System.Windows.Forms.GroupBox();
+            this.Selected_Available_List = new System.Windows.Forms.ListBox();
+            this.Selected_Available_Group = new System.Windows.Forms.GroupBox();
+            this.Selected_Control_Group = new System.Windows.Forms.GroupBox();
+            this.Selected_Control_Delete = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.Selected_Image)).BeginInit();
+            this.Search_Group.SuspendLayout();
+            this.Selected_Group.SuspendLayout();
+            this.Build_Group.SuspendLayout();
+            this.Dependencies_Group.SuspendLayout();
+            this.Control_Group.SuspendLayout();
+            this.Selected_Available_Group.SuspendLayout();
+            this.Selected_Control_Group.SuspendLayout();
             this.SuspendLayout();
             // 
-            // PictureBox_Main
+            // Selected_Image
             // 
-            this.PictureBox_Main.Location = new System.Drawing.Point(247, 12);
-            this.PictureBox_Main.Name = "PictureBox_Main";
-            this.PictureBox_Main.Size = new System.Drawing.Size(128, 128);
-            this.PictureBox_Main.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PictureBox_Main.TabIndex = 1;
-            this.PictureBox_Main.TabStop = false;
+            this.Selected_Image.Location = new System.Drawing.Point(6, 19);
+            this.Selected_Image.Name = "Selected_Image";
+            this.Selected_Image.Size = new System.Drawing.Size(128, 128);
+            this.Selected_Image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.Selected_Image.TabIndex = 1;
+            this.Selected_Image.TabStop = false;
             // 
-            // textBox1
+            // Search_Edit
             // 
-            this.textBox1.Location = new System.Drawing.Point(405, 276);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(175, 20);
-            this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "chest";
+            this.Search_Edit.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Search_Edit.Location = new System.Drawing.Point(6, 18);
+            this.Search_Edit.Name = "Search_Edit";
+            this.Search_Edit.Size = new System.Drawing.Size(182, 20);
+            this.Search_Edit.TabIndex = 2;
             // 
-            // button1
+            // Search_Find
             // 
-            this.button1.Location = new System.Drawing.Point(586, 274);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(26, 23);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "S";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.Search_Find.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.Search_Find.Location = new System.Drawing.Point(194, 16);
+            this.Search_Find.Name = "Search_Find";
+            this.Search_Find.Size = new System.Drawing.Size(50, 23);
+            this.Search_Find.TabIndex = 3;
+            this.Search_Find.Text = "Find";
+            this.Search_Find.UseVisualStyleBackColor = true;
+            this.Search_Find.Click += new System.EventHandler(this.Search_Find_Click);
             // 
-            // listBox1
+            // Search_List
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(405, 303);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(207, 108);
-            this.listBox1.TabIndex = 4;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.Search_List.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Search_List.FormattingEnabled = true;
+            this.Search_List.Location = new System.Drawing.Point(6, 45);
+            this.Search_List.Name = "Search_List";
+            this.Search_List.Size = new System.Drawing.Size(238, 108);
+            this.Search_List.Sorted = true;
+            this.Search_List.TabIndex = 4;
+            this.Search_List.SelectedIndexChanged += new System.EventHandler(this.Search_List_SelectedIndexChanged);
             // 
-            // ListBox_Main
+            // Build_List
             // 
-            this.ListBox_Main.FormattingEnabled = true;
-            this.ListBox_Main.Location = new System.Drawing.Point(12, 12);
-            this.ListBox_Main.Name = "ListBox_Main";
-            this.ListBox_Main.Size = new System.Drawing.Size(229, 420);
-            this.ListBox_Main.Sorted = true;
-            this.ListBox_Main.TabIndex = 5;
-            this.ListBox_Main.SelectedIndexChanged += new System.EventHandler(this.ListBox_Main_SelectedIndexChanged);
+            this.Build_List.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Build_List.FormattingEnabled = true;
+            this.Build_List.Location = new System.Drawing.Point(8, 21);
+            this.Build_List.Margin = new System.Windows.Forms.Padding(5);
+            this.Build_List.Name = "Build_List";
+            this.Build_List.Size = new System.Drawing.Size(234, 303);
+            this.Build_List.Sorted = true;
+            this.Build_List.TabIndex = 5;
+            this.Build_List.SelectedIndexChanged += new System.EventHandler(this.Build_List_SelectedIndexChanged);
             // 
-            // Label_Type
+            // Selected_Type
             // 
-            this.Label_Type.AutoSize = true;
-            this.Label_Type.Location = new System.Drawing.Point(381, 12);
-            this.Label_Type.Name = "Label_Type";
-            this.Label_Type.Size = new System.Drawing.Size(31, 13);
-            this.Label_Type.TabIndex = 6;
-            this.Label_Type.Text = "Type";
+            this.Selected_Type.AutoSize = true;
+            this.Selected_Type.Location = new System.Drawing.Point(141, 39);
+            this.Selected_Type.Name = "Selected_Type";
+            this.Selected_Type.Size = new System.Drawing.Size(31, 13);
+            this.Selected_Type.TabIndex = 6;
+            this.Selected_Type.Text = "Type";
             // 
-            // button2
+            // Search_Add
             // 
-            this.button2.Location = new System.Drawing.Point(537, 417);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Add";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.Search_Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Search_Add.Location = new System.Drawing.Point(169, 158);
+            this.Search_Add.Name = "Search_Add";
+            this.Search_Add.Size = new System.Drawing.Size(75, 23);
+            this.Search_Add.TabIndex = 7;
+            this.Search_Add.Text = "Add";
+            this.Search_Add.UseVisualStyleBackColor = true;
+            this.Search_Add.Click += new System.EventHandler(this.Search_Add_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(247, 146);
+            this.button3.Location = new System.Drawing.Point(6, 21);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 8;
@@ -119,19 +146,9 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(247, 175);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 9;
-            this.button4.Text = "Codes";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
-            // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(247, 204);
+            this.button5.Location = new System.Drawing.Point(6, 50);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(75, 23);
             this.button5.TabIndex = 10;
@@ -141,7 +158,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(247, 406);
+            this.button6.Location = new System.Drawing.Point(87, 50);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(75, 23);
             this.button6.TabIndex = 11;
@@ -149,52 +166,182 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
-            // ListBox_Dep
+            // Dependencies_List
             // 
-            this.ListBox_Dep.FormattingEnabled = true;
-            this.ListBox_Dep.Location = new System.Drawing.Point(384, 45);
-            this.ListBox_Dep.Name = "ListBox_Dep";
-            this.ListBox_Dep.Size = new System.Drawing.Size(228, 212);
-            this.ListBox_Dep.TabIndex = 12;
+            this.Dependencies_List.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Dependencies_List.FormattingEnabled = true;
+            this.Dependencies_List.Location = new System.Drawing.Point(8, 21);
+            this.Dependencies_List.Margin = new System.Windows.Forms.Padding(5);
+            this.Dependencies_List.Name = "Dependencies_List";
+            this.Dependencies_List.Size = new System.Drawing.Size(234, 160);
+            this.Dependencies_List.Sorted = true;
+            this.Dependencies_List.TabIndex = 12;
+            // 
+            // Search_Group
+            // 
+            this.Search_Group.Controls.Add(this.Search_Add);
+            this.Search_Group.Controls.Add(this.Search_Edit);
+            this.Search_Group.Controls.Add(this.Search_Find);
+            this.Search_Group.Controls.Add(this.Search_List);
+            this.Search_Group.Location = new System.Drawing.Point(268, 357);
+            this.Search_Group.Name = "Search_Group";
+            this.Search_Group.Size = new System.Drawing.Size(250, 192);
+            this.Search_Group.TabIndex = 13;
+            this.Search_Group.TabStop = false;
+            this.Search_Group.Text = "Add extension:";
+            // 
+            // Selected_Group
+            // 
+            this.Selected_Group.Controls.Add(this.Selected_Control_Group);
+            this.Selected_Group.Controls.Add(this.Selected_Available_Group);
+            this.Selected_Group.Controls.Add(this.Selected_Name);
+            this.Selected_Group.Controls.Add(this.Selected_Image);
+            this.Selected_Group.Controls.Add(this.Selected_Type);
+            this.Selected_Group.Location = new System.Drawing.Point(268, 12);
+            this.Selected_Group.Name = "Selected_Group";
+            this.Selected_Group.Size = new System.Drawing.Size(504, 339);
+            this.Selected_Group.TabIndex = 14;
+            this.Selected_Group.TabStop = false;
+            this.Selected_Group.Text = "Selected extension:";
+            // 
+            // Selected_Name
+            // 
+            this.Selected_Name.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Selected_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Selected_Name.Location = new System.Drawing.Point(140, 19);
+            this.Selected_Name.Name = "Selected_Name";
+            this.Selected_Name.Size = new System.Drawing.Size(358, 20);
+            this.Selected_Name.TabIndex = 7;
+            this.Selected_Name.Text = "Name";
+            // 
+            // Build_Group
+            // 
+            this.Build_Group.Controls.Add(this.Build_List);
+            this.Build_Group.Location = new System.Drawing.Point(12, 12);
+            this.Build_Group.Name = "Build_Group";
+            this.Build_Group.Size = new System.Drawing.Size(250, 339);
+            this.Build_Group.TabIndex = 15;
+            this.Build_Group.TabStop = false;
+            this.Build_Group.Text = "Extension:";
+            // 
+            // Dependencies_Group
+            // 
+            this.Dependencies_Group.Controls.Add(this.Dependencies_List);
+            this.Dependencies_Group.Location = new System.Drawing.Point(12, 357);
+            this.Dependencies_Group.Name = "Dependencies_Group";
+            this.Dependencies_Group.Size = new System.Drawing.Size(250, 192);
+            this.Dependencies_Group.TabIndex = 16;
+            this.Dependencies_Group.TabStop = false;
+            this.Dependencies_Group.Text = "Dependencies:";
+            // 
+            // Control_Group
+            // 
+            this.Control_Group.Controls.Add(this.button6);
+            this.Control_Group.Controls.Add(this.button3);
+            this.Control_Group.Controls.Add(this.button5);
+            this.Control_Group.Location = new System.Drawing.Point(524, 357);
+            this.Control_Group.Name = "Control_Group";
+            this.Control_Group.Size = new System.Drawing.Size(248, 192);
+            this.Control_Group.TabIndex = 17;
+            this.Control_Group.TabStop = false;
+            this.Control_Group.Text = "Build control:";
+            // 
+            // Selected_Available_List
+            // 
+            this.Selected_Available_List.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Selected_Available_List.FormattingEnabled = true;
+            this.Selected_Available_List.Location = new System.Drawing.Point(10, 19);
+            this.Selected_Available_List.Name = "Selected_Available_List";
+            this.Selected_Available_List.Size = new System.Drawing.Size(112, 147);
+            this.Selected_Available_List.Sorted = true;
+            this.Selected_Available_List.TabIndex = 8;
+            // 
+            // Selected_Available_Group
+            // 
+            this.Selected_Available_Group.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.Selected_Available_Group.Controls.Add(this.Selected_Available_List);
+            this.Selected_Available_Group.Location = new System.Drawing.Point(6, 153);
+            this.Selected_Available_Group.Name = "Selected_Available_Group";
+            this.Selected_Available_Group.Size = new System.Drawing.Size(128, 180);
+            this.Selected_Available_Group.TabIndex = 9;
+            this.Selected_Available_Group.TabStop = false;
+            this.Selected_Available_Group.Text = "Available versions:";
+            // 
+            // Selected_Control_Group
+            // 
+            this.Selected_Control_Group.Controls.Add(this.Selected_Control_Delete);
+            this.Selected_Control_Group.Location = new System.Drawing.Point(343, 153);
+            this.Selected_Control_Group.Name = "Selected_Control_Group";
+            this.Selected_Control_Group.Size = new System.Drawing.Size(155, 180);
+            this.Selected_Control_Group.TabIndex = 10;
+            this.Selected_Control_Group.TabStop = false;
+            this.Selected_Control_Group.Text = "Selected control:";
+            // 
+            // Selected_Control_Delete
+            // 
+            this.Selected_Control_Delete.Location = new System.Drawing.Point(6, 19);
+            this.Selected_Control_Delete.Name = "Selected_Control_Delete";
+            this.Selected_Control_Delete.Size = new System.Drawing.Size(75, 23);
+            this.Selected_Control_Delete.TabIndex = 0;
+            this.Selected_Control_Delete.Text = "Delete";
+            this.Selected_Control_Delete.UseVisualStyleBackColor = true;
+            this.Selected_Control_Delete.Click += new System.EventHandler(this.Selected_Control_Delete_Click);
             // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(624, 441);
-            this.Controls.Add(this.ListBox_Dep);
-            this.Controls.Add(this.button6);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.Label_Type);
-            this.Controls.Add(this.ListBox_Main);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.PictureBox_Main);
+            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.Control_Group);
+            this.Controls.Add(this.Dependencies_Group);
+            this.Controls.Add(this.Build_Group);
+            this.Controls.Add(this.Selected_Group);
+            this.Controls.Add(this.Search_Group);
             this.Name = "Form_Main";
             this.Text = "Main - ModBuilder";
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBox_Main)).EndInit();
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Main_FormClosing);
+            ((System.ComponentModel.ISupportInitialize)(this.Selected_Image)).EndInit();
+            this.Search_Group.ResumeLayout(false);
+            this.Search_Group.PerformLayout();
+            this.Selected_Group.ResumeLayout(false);
+            this.Selected_Group.PerformLayout();
+            this.Build_Group.ResumeLayout(false);
+            this.Dependencies_Group.ResumeLayout(false);
+            this.Control_Group.ResumeLayout(false);
+            this.Selected_Available_Group.ResumeLayout(false);
+            this.Selected_Control_Group.ResumeLayout(false);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.PictureBox PictureBox_Main;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox ListBox_Main;
-        private System.Windows.Forms.Label Label_Type;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.PictureBox Selected_Image;
+        private System.Windows.Forms.TextBox Search_Edit;
+        private System.Windows.Forms.Button Search_Find;
+        private System.Windows.Forms.ListBox Search_List;
+        private System.Windows.Forms.ListBox Build_List;
+        private System.Windows.Forms.Label Selected_Type;
+        private System.Windows.Forms.Button Search_Add;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.FolderBrowserDialog FolderBrowserDialog_Download;
-        private System.Windows.Forms.ListBox ListBox_Dep;
+        private System.Windows.Forms.FolderBrowserDialog Download_FolderBrowserDialog;
+        private System.Windows.Forms.ListBox Dependencies_List;
+        private System.Windows.Forms.GroupBox Search_Group;
+        private System.Windows.Forms.GroupBox Selected_Group;
+        private System.Windows.Forms.Label Selected_Name;
+        private System.Windows.Forms.GroupBox Build_Group;
+        private System.Windows.Forms.GroupBox Dependencies_Group;
+        private System.Windows.Forms.GroupBox Control_Group;
+        private System.Windows.Forms.ListBox Selected_Available_List;
+        private System.Windows.Forms.GroupBox Selected_Available_Group;
+        private System.Windows.Forms.GroupBox Selected_Control_Group;
+        private System.Windows.Forms.Button Selected_Control_Delete;
     }
 }

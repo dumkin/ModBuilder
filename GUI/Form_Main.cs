@@ -50,7 +50,16 @@ namespace ModBuilder.GUI
             LoadCache();
             CheckCache();
         }
+        private void Form_Main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Environment.Exit(0);
+        }
 
+        public void AddItem(String ID, String Name)
+        {
+            Project.List[Name] = ID;
+            Build_List.Items.Add(Name);
+        }
         public void LoadCache()
         {
             Enabled = false;
@@ -61,12 +70,6 @@ namespace ModBuilder.GUI
             }
 
             Enabled = true;
-        }
-
-        public void AddItem(String ID, String Name)
-        {
-            Project.List[Name] = ID;
-            ListBox_Main.Items.Add(Name);
         }
 
         public void CheckCache()
@@ -96,9 +99,10 @@ namespace ModBuilder.GUI
 
                 BeginInvoke(new MethodInvoker(delegate
                 {
+                    Dependencies_List.Items.Clear();
                     foreach (var Item in Project.Dependencies)
                     {
-                        ListBox_Dep.Items.Add(Item.Key);
+                        Dependencies_List.Items.Add(Item.Key);
                     }
                 }));
 
@@ -106,31 +110,28 @@ namespace ModBuilder.GUI
             }
         }
 
-        private void ListBox_Main_SelectedIndexChanged(object sender, EventArgs e)
+        private void Build_List_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ListBox_Main.SelectedIndex >= 0)
+            if (Build_List.SelectedIndex >= 0)
             {
-                var ID = Project.List[ListBox_Main.SelectedItem.ToString()];
+                var ID = Project.List[Build_List.SelectedItem.ToString()];
 
-                PictureBox_Main.Image = Project.Extension[ID].Image;
-                Label_Type.Text = Project.Extension[ID].Type;
+                Selected_Name.Text = Project.Extension[ID].Name;
+                Selected_Type.Text = Project.Extension[ID].Type;
+                Selected_Image.Image = Project.Extension[ID].Image;
+
+                Selected_Available_List.Items.Clear();
+                foreach (var Item in Project.Extension[ID].Versions)
+                {
+                    Selected_Available_List.Items.Add(Item);
+                }
             }
         }
 
-        /*
-         if (e.Button == MouseButtons.Right && ListView_Main.SelectedIndices.Count > 0)
-            {
-                if (ListView_Main.FocusedItem.Bounds.Contains(e.Location) == true)
-                {
-                    ContextMenuStrip_Main.Show(Cursor.Position);
-                }
-            }
-        */
-
-        private void button1_Click(object sender, EventArgs e)
+        private void Search_Find_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
-            Parse.AsyncSearch(textBox1.Text, SearchCallback);
+            Search_List.Items.Clear();
+            Parse.AsyncSearch(Search_Edit.Text, SearchCallback);
         }
 
         public void SearchCallback()
@@ -139,12 +140,12 @@ namespace ModBuilder.GUI
             {
                 foreach (var Item in Project.Search)
                 {
-                    listBox1.Items.Add(Item.Key);
+                    Search_List.Items.Add(Item.Key);
                 }
             }));
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void Search_List_SelectedIndexChanged(object sender, EventArgs e)
         {
             /*var index = listBox1.SelectedIndex;
 
@@ -154,44 +155,35 @@ namespace ModBuilder.GUI
             }*/
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void Search_Add_Click(object sender, EventArgs e)
         {
-            AddCache(Project.Search[listBox1.SelectedItem.ToString()], listBox1.SelectedItem.ToString());
+            AddCache(Project.Search[Search_List.SelectedItem.ToString()], Search_List.SelectedItem.ToString());
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            var ID = Project.List[ListBox_Main.SelectedItem.ToString()];
+            var ID = Project.List[Build_List.SelectedItem.ToString()];
 
-            listBox1.Items.Clear();
+            Search_List.Items.Clear();
             //MessageBox.Show(Project.Extension[ID].Versions.ToString());
             foreach (var item in Project.Extension[ID].Versions)
             {
-                listBox1.Items.Add(item);
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            listBox1.Items.Clear();
-            foreach (var item in Project.CodeVersions)
-            {
-                listBox1.Items.Add(item);
+                Search_List.Items.Add(item);
             }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            listBox1.Items.Clear();
+            Search_List.Items.Clear();
             foreach (var item in Project.AvailableVersions)
             {
-                listBox1.Items.Add(item);
+                Search_List.Items.Add(item);
             }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (FolderBrowserDialog_Download.ShowDialog() == DialogResult.OK)
+            if (Download_FolderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
                 Enabled = false;
 
@@ -199,7 +191,7 @@ namespace ModBuilder.GUI
 
                 foreach (var Item in Project.Extension)
                 {
-                    Parse.AsyncDownload(Item.Key, listBox1.SelectedItem.ToString(), FolderBrowserDialog_Download.SelectedPath, DownloadCallback);
+                    Parse.AsyncDownload(Item.Key, Search_List.SelectedItem.ToString(), Download_FolderBrowserDialog.SelectedPath, DownloadCallback);
                 }
             }
         }
@@ -216,5 +208,21 @@ namespace ModBuilder.GUI
                 }));
             }
         }
+
+        private void Selected_Control_Delete_Click(object sender, EventArgs e)
+        {
+            Enabled = false;
+
+            Project.Extension.Remove(Project.List[Build_List.SelectedItem.ToString()]);
+
+            Config.Save(Project, Projects.SelectedProjectFile);
+
+            Build_List.Items.Remove(Build_List.SelectedItem);
+            Parse.GenerateAvailableVersions();
+
+            Enabled = true;
+        }
+
+        
     }
 }
