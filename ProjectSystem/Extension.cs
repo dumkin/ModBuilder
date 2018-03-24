@@ -20,5 +20,9 @@ namespace ModBuilder.ProjectSystem
         public Image Image;
 
         public List<String> Versions = new List<String>();
+
+        public String FileName;
+
+        public String FileURL;
     }
 }

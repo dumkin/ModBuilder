@@ -1,9 +1,7 @@
 ﻿using ModBuilder.ProjectSystem;
 using ModBuilder.Utilities;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace ModBuilder.GUI
@@ -96,7 +94,7 @@ namespace ModBuilder.GUI
             {
                 Config.Save(Project, Projects.SelectedProjectFile);
 
-                GenerateAvailableVersions();
+                Parse.GenerateAvailableVersions();
             }
         }
 
@@ -109,31 +107,6 @@ namespace ModBuilder.GUI
                 PictureBox_Main.Image = Project.Extension[ID].Image;
                 Label_Type.Text = Project.Extension[ID].Type;
             }
-        }
-
-        public void GenerateAvailableVersions()
-        {
-            Project.AvailableVersions.Clear();
-            var Cleared = true;
-
-            foreach (var Item in Project.Extension)
-            {
-                if (Cleared)
-                {
-                    Project.AvailableVersions = Item.Value.Versions;
-
-                    Cleared = false;
-                }
-                else
-                {
-                    AddAvailableVersions(Item.Key);
-                }
-            }
-        }
-
-        public void AddAvailableVersions(String ID)
-        {
-            Project.AvailableVersions = Project.AvailableVersions.Intersect(Project.Extension[ID].Versions).ToList();
         }
 
         /*
@@ -206,6 +179,20 @@ namespace ModBuilder.GUI
             {
                 listBox1.Items.Add(item);
             }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            var ID = Project.List[ListBox_Main.SelectedItem.ToString()];
+            Parse.AsyncDownload(ID, listBox1.SelectedItem.ToString(), DownloadCallback);
+        }
+
+        public void DownloadCallback(String ID)
+        {
+            BeginInvoke(new MethodInvoker(delegate
+            {
+                textBox1.Text = Project.Extension[ID].FileURL;
+            }));
         }
     }
 }

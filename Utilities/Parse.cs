@@ -3,6 +3,7 @@ using ModBuilder.ProjectSystem;
 using System;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -118,6 +119,76 @@ namespace ModBuilder.Utilities
             }
 
             Callback();
+        }
+
+        public static void GenerateAvailableVersions()
+        {
+            Project.AvailableVersions.Clear();
+            var Cleared = true;
+
+            foreach (var Item in Project.Extension)
+            {
+                if (Cleared)
+                {
+                    Project.AvailableVersions = Item.Value.Versions;
+
+                    Cleared = false;
+                }
+                else
+                {
+                    AddAvailableVersions(Item.Key);
+                }
+            }
+        }
+        public static void AddAvailableVersions(String ID)
+        {
+            Project.AvailableVersions = Project.AvailableVersions.Intersect(Project.Extension[ID].Versions).ToList();
+        }
+
+        public delegate void CallbackDownload(String ID);
+        public static void AsyncDownload(String ID, String SelectedVersion, CallbackDownload Callback)
+        {
+            var ThreadAsyncDownload = new Thread(() => Download(ID, SelectedVersion, Callback));
+            ThreadAsyncDownload.Start();
+        }
+        public static void Download(String ID, String SelectedVersion, CallbackDownload Callback)
+        {
+            PrepareDownload(ID, SelectedVersion);
+
+            Callback(ID);
+        }
+
+        public static void PrepareDownload(String ID, String SelectedVersion)
+        {
+            var Client = new WebClient();
+
+            var FileListDOM = Client.DownloadString("http://minecraft.curseforge.com/projects/" + ID + "/files?filter-game-version=" + Project.CodeVersions[SelectedVersion]);
+            var FileListQuery = CQ.Create(FileListDOM);
+
+            var URL = "http://minecraft.curseforge.com" + FileListQuery["a.overflow-tip"].Attr("href");
+
+            var FileDOM = Client.DownloadString(URL);
+            var FileQuery = CQ.Create(FileDOM);
+
+            GetFileName(ID, FileQuery);
+            GetFileURL(ID, URL);
+        }
+
+        public static void GetFileName(String ID, CQ Query)
+        {
+            var FileName = Query["div.info-data"].First().Text();
+
+            Project.Extension[ID].FileName = FileName;
+        }
+
+        public static void GetFileURL(String ID, String URL)
+        {
+            var ExplodeURL = URL.Split('/');
+
+            var FirstCode = ExplodeURL[6].Substring(0, 4);
+            var SecondCode = ExplodeURL[6].Substring(4);
+
+            Project.Extension[ID].FileURL = "https://addons-origin.cursecdn.com/files/" + FirstCode + "/" + SecondCode + "/" + Project.Extension[ID].FileName;
         }
     }
 }
