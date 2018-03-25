@@ -35,9 +35,6 @@
             this.Build_List = new System.Windows.Forms.ListBox();
             this.Selected_Type = new System.Windows.Forms.Label();
             this.Search_Add = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
             this.Download_FolderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
             this.Dependencies_List = new System.Windows.Forms.ListBox();
             this.Search_Group = new System.Windows.Forms.GroupBox();
@@ -50,6 +47,10 @@
             this.Build_Group = new System.Windows.Forms.GroupBox();
             this.Dependencies_Group = new System.Windows.Forms.GroupBox();
             this.Control_Group = new System.Windows.Forms.GroupBox();
+            this.Control_Available = new System.Windows.Forms.ComboBox();
+            this.Status = new System.Windows.Forms.StatusStrip();
+            this.Status_Label = new System.Windows.Forms.ToolStripStatusLabel();
+            this.Control_Download = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Selected_Image)).BeginInit();
             this.Search_Group.SuspendLayout();
             this.Selected_Group.SuspendLayout();
@@ -58,6 +59,7 @@
             this.Build_Group.SuspendLayout();
             this.Dependencies_Group.SuspendLayout();
             this.Control_Group.SuspendLayout();
+            this.Status.SuspendLayout();
             this.SuspendLayout();
             // 
             // Selected_Image
@@ -100,7 +102,6 @@
             this.Search_List.Size = new System.Drawing.Size(238, 108);
             this.Search_List.Sorted = true;
             this.Search_List.TabIndex = 4;
-            this.Search_List.SelectedIndexChanged += new System.EventHandler(this.Search_List_SelectedIndexChanged);
             // 
             // Build_List
             // 
@@ -135,36 +136,6 @@
             this.Search_Add.Text = "Add";
             this.Search_Add.UseVisualStyleBackColor = true;
             this.Search_Add.Click += new System.EventHandler(this.Search_Add_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(6, 21);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Versions";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(6, 50);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 10;
-            this.button5.Text = "Available";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(87, 50);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
-            this.button6.TabIndex = 11;
-            this.button6.Text = "Download";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // Dependencies_List
             // 
@@ -201,7 +172,7 @@
             this.Selected_Group.Controls.Add(this.Selected_Type);
             this.Selected_Group.Location = new System.Drawing.Point(268, 12);
             this.Selected_Group.Name = "Selected_Group";
-            this.Selected_Group.Size = new System.Drawing.Size(504, 339);
+            this.Selected_Group.Size = new System.Drawing.Size(507, 339);
             this.Selected_Group.TabIndex = 14;
             this.Selected_Group.TabStop = false;
             this.Selected_Group.Text = "Selected extension:";
@@ -209,7 +180,7 @@
             // Selected_Control_Group
             // 
             this.Selected_Control_Group.Controls.Add(this.Selected_Control_Delete);
-            this.Selected_Control_Group.Location = new System.Drawing.Point(343, 153);
+            this.Selected_Control_Group.Location = new System.Drawing.Point(346, 153);
             this.Selected_Control_Group.Name = "Selected_Control_Group";
             this.Selected_Control_Group.Size = new System.Drawing.Size(155, 180);
             this.Selected_Control_Group.TabIndex = 10;
@@ -257,7 +228,7 @@
             this.Selected_Name.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Selected_Name.Location = new System.Drawing.Point(140, 19);
             this.Selected_Name.Name = "Selected_Name";
-            this.Selected_Name.Size = new System.Drawing.Size(358, 20);
+            this.Selected_Name.Size = new System.Drawing.Size(361, 20);
             this.Selected_Name.TabIndex = 7;
             this.Selected_Name.Text = "Name";
             // 
@@ -283,21 +254,56 @@
             // 
             // Control_Group
             // 
-            this.Control_Group.Controls.Add(this.button6);
-            this.Control_Group.Controls.Add(this.button3);
-            this.Control_Group.Controls.Add(this.button5);
+            this.Control_Group.Controls.Add(this.Control_Download);
+            this.Control_Group.Controls.Add(this.Control_Available);
             this.Control_Group.Location = new System.Drawing.Point(524, 357);
             this.Control_Group.Name = "Control_Group";
-            this.Control_Group.Size = new System.Drawing.Size(248, 192);
+            this.Control_Group.Size = new System.Drawing.Size(251, 192);
             this.Control_Group.TabIndex = 17;
             this.Control_Group.TabStop = false;
             this.Control_Group.Text = "Build control:";
+            // 
+            // Control_Available
+            // 
+            this.Control_Available.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.Control_Available.FormattingEnabled = true;
+            this.Control_Available.Location = new System.Drawing.Point(6, 20);
+            this.Control_Available.Name = "Control_Available";
+            this.Control_Available.Size = new System.Drawing.Size(158, 21);
+            this.Control_Available.TabIndex = 12;
+            // 
+            // Status
+            // 
+            this.Status.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Status_Label});
+            this.Status.Location = new System.Drawing.Point(0, 556);
+            this.Status.Name = "Status";
+            this.Status.Size = new System.Drawing.Size(787, 22);
+            this.Status.SizingGrip = false;
+            this.Status.TabIndex = 18;
+            // 
+            // Status_Label
+            // 
+            this.Status_Label.Name = "Status_Label";
+            this.Status_Label.Size = new System.Drawing.Size(72, 17);
+            this.Status_Label.Text = "Status_Label";
+            // 
+            // Control_Download
+            // 
+            this.Control_Download.Location = new System.Drawing.Point(170, 19);
+            this.Control_Download.Name = "Control_Download";
+            this.Control_Download.Size = new System.Drawing.Size(75, 23);
+            this.Control_Download.TabIndex = 13;
+            this.Control_Download.Text = "Download";
+            this.Control_Download.UseVisualStyleBackColor = true;
+            this.Control_Download.Click += new System.EventHandler(this.Control_Download_Click);
             // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.ClientSize = new System.Drawing.Size(787, 578);
+            this.Controls.Add(this.Status);
             this.Controls.Add(this.Control_Group);
             this.Controls.Add(this.Dependencies_Group);
             this.Controls.Add(this.Build_Group);
@@ -317,7 +323,10 @@
             this.Build_Group.ResumeLayout(false);
             this.Dependencies_Group.ResumeLayout(false);
             this.Control_Group.ResumeLayout(false);
+            this.Status.ResumeLayout(false);
+            this.Status.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -329,9 +338,6 @@
         private System.Windows.Forms.ListBox Build_List;
         private System.Windows.Forms.Label Selected_Type;
         private System.Windows.Forms.Button Search_Add;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
         private System.Windows.Forms.FolderBrowserDialog Download_FolderBrowserDialog;
         private System.Windows.Forms.ListBox Dependencies_List;
         private System.Windows.Forms.GroupBox Search_Group;
@@ -344,5 +350,9 @@
         private System.Windows.Forms.GroupBox Selected_Available_Group;
         private System.Windows.Forms.GroupBox Selected_Control_Group;
         private System.Windows.Forms.Button Selected_Control_Delete;
+        private System.Windows.Forms.ComboBox Control_Available;
+        private System.Windows.Forms.StatusStrip Status;
+        private System.Windows.Forms.ToolStripStatusLabel Status_Label;
+        private System.Windows.Forms.Button Control_Download;
     }
 }

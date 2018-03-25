@@ -109,9 +109,11 @@ namespace ModBuilder.Utilities
                 var URL = Item.GetAttribute("href");
                 var ExtensionID = URL.Split('/')[4];
 
+                var ExtensionName = Item.TextContent;
+
                 if (!Project.Extension.ContainsKey(ExtensionID))
                 {
-                    Project.Dependencies[ExtensionID] = new Extension { };
+                    Project.Dependencies[ExtensionID] = new Extension { Name = ExtensionName };
                 }
             }
         }
