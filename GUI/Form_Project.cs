@@ -50,7 +50,6 @@ namespace ModBuilder
 
             Enabled = true;
         }
-
         private void Button_Load_Click(object sender, EventArgs e)
         {
             Enabled = false;
@@ -60,7 +59,6 @@ namespace ModBuilder
 
             Enabled = true;
         }
-
         private void Button_New_Click(object sender, EventArgs e)
         {
             Enabled = false;

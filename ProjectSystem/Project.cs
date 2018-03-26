@@ -15,6 +15,9 @@ namespace ModBuilder.ProjectSystem
         public static List<String> AvailableVersions = new List<String>();
         public static Dictionary<String, String> CodeVersions = new Dictionary<String, String>();
 
+        public static String SelectedVersion;
+        public static String DownloadFolder;
+
         public static Dictionary<String, String> List = new Dictionary<String, String>();
         public static Dictionary<String, String> Search = new Dictionary<String, String>();
 

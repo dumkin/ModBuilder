@@ -47,10 +47,10 @@
             this.Build_Group = new System.Windows.Forms.GroupBox();
             this.Dependencies_Group = new System.Windows.Forms.GroupBox();
             this.Control_Group = new System.Windows.Forms.GroupBox();
+            this.Control_Download = new System.Windows.Forms.Button();
             this.Control_Available = new System.Windows.Forms.ComboBox();
             this.Status = new System.Windows.Forms.StatusStrip();
             this.Status_Label = new System.Windows.Forms.ToolStripStatusLabel();
-            this.Control_Download = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Selected_Image)).BeginInit();
             this.Search_Group.SuspendLayout();
             this.Selected_Group.SuspendLayout();
@@ -146,6 +146,7 @@
             this.Dependencies_List.Location = new System.Drawing.Point(8, 21);
             this.Dependencies_List.Margin = new System.Windows.Forms.Padding(5);
             this.Dependencies_List.Name = "Dependencies_List";
+            this.Dependencies_List.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.Dependencies_List.Size = new System.Drawing.Size(234, 160);
             this.Dependencies_List.Sorted = true;
             this.Dependencies_List.TabIndex = 12;
@@ -263,6 +264,16 @@
             this.Control_Group.TabStop = false;
             this.Control_Group.Text = "Build control:";
             // 
+            // Control_Download
+            // 
+            this.Control_Download.Location = new System.Drawing.Point(170, 19);
+            this.Control_Download.Name = "Control_Download";
+            this.Control_Download.Size = new System.Drawing.Size(75, 23);
+            this.Control_Download.TabIndex = 13;
+            this.Control_Download.Text = "Download";
+            this.Control_Download.UseVisualStyleBackColor = true;
+            this.Control_Download.Click += new System.EventHandler(this.Control_Download_Click);
+            // 
             // Control_Available
             // 
             this.Control_Available.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -287,16 +298,6 @@
             this.Status_Label.Name = "Status_Label";
             this.Status_Label.Size = new System.Drawing.Size(72, 17);
             this.Status_Label.Text = "Status_Label";
-            // 
-            // Control_Download
-            // 
-            this.Control_Download.Location = new System.Drawing.Point(170, 19);
-            this.Control_Download.Name = "Control_Download";
-            this.Control_Download.Size = new System.Drawing.Size(75, 23);
-            this.Control_Download.TabIndex = 13;
-            this.Control_Download.Text = "Download";
-            this.Control_Download.UseVisualStyleBackColor = true;
-            this.Control_Download.Click += new System.EventHandler(this.Control_Download_Click);
             // 
             // Form_Main
             // 

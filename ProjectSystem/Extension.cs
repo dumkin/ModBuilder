@@ -14,15 +14,18 @@ namespace ModBuilder.ProjectSystem
         [JsonProperty]
         public String Type;
 
-        [JsonProperty]
         public String ImageURL;
+
+        public String FileName;
+
+        public String FileURL;
 
         public Image Image;
 
         public List<String> Versions = new List<String>();
 
-        public String FileName;
+        public List<String> Dependencies = new List<String>();
 
-        public String FileURL;
+        public List<String> Dependents = new List<String>();
     }
 }

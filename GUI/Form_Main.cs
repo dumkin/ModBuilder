@@ -151,10 +151,17 @@ namespace ModBuilder.GUI
                 Enabled = false;
 
                 Project.CountDownload = 0;
+                Project.SelectedVersion = Control_Available.SelectedItem.ToString();
+                Project.DownloadFolder = Download_FolderBrowserDialog.SelectedPath;
 
                 foreach (var Item in Project.Extension)
                 {
-                    Parse.AsyncDownload(Item.Key, Control_Available.SelectedItem.ToString(), Download_FolderBrowserDialog.SelectedPath, DownloadCallback);
+                    Parse.AsyncDownload(Item.Key, "Extension", DownloadCallback);
+                }
+
+                foreach (var Item in Project.Dependencies)
+                {
+                    Parse.AsyncDownload(Item.Key, "Dependencies", DownloadCallback);
                 }
             }
         }
@@ -162,7 +169,9 @@ namespace ModBuilder.GUI
         {
             Project.CountDownload++;
 
-            if (Project.CountDownload == Project.Extension.Count)
+            Status_Label.Text = Project.CountDownload.ToString() + "/" + (Project.Extension.Count + Project.Dependencies.Count).ToString();
+
+            if (Project.CountDownload == Project.Extension.Count + Project.Dependencies.Count)
             {
                 BeginInvoke(new MethodInvoker(delegate
                 {

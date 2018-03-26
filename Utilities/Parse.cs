@@ -1,6 +1,7 @@
 ﻿using CsQuery;
 using ModBuilder.ProjectSystem;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -107,13 +108,28 @@ namespace ModBuilder.Utilities
             foreach (var Item in Query)
             {
                 var URL = Item.GetAttribute("href");
-                var ExtensionID = URL.Split('/')[4];
 
+                var ExtensionID = URL.Split('/')[4];
                 var ExtensionName = Item.TextContent;
 
-                if (!Project.Extension.ContainsKey(ExtensionID))
+                Project.Extension[ID].Dependencies.Add(ExtensionID);
+
+                if (Project.Extension.ContainsKey(ExtensionID))
                 {
-                    Project.Dependencies[ExtensionID] = new Extension { Name = ExtensionName };
+                    continue;
+                }
+
+                if (!Project.Dependencies.ContainsKey(ExtensionID))
+                {
+                    Project.Dependencies[ExtensionID] = new Extension
+                    {
+                        Name = ExtensionName,
+                        Dependents = new List<String> { ID }
+                    };
+                }
+                else
+                {
+                    Project.Dependencies[ExtensionID].Dependents.Add(ID);
                 }
             }
         }
@@ -169,26 +185,35 @@ namespace ModBuilder.Utilities
         }
 
         public delegate void CallbackDownload(String ID);
-        public static void AsyncDownload(String ID, String SelectedVersion, String Folder, CallbackDownload Callback)
+        public static void AsyncDownload(String ID, String Type, CallbackDownload Callback)
         {
-            var ThreadAsyncDownload = new Thread(() => Download(ID, SelectedVersion, Folder, Callback));
+            var ThreadAsyncDownload = new Thread(() => Download(ID, Type, Callback));
             ThreadAsyncDownload.Start();
         }
-        public static void Download(String ID, String SelectedVersion, String Folder, CallbackDownload Callback)
+        public static void Download(String ID, String Type, CallbackDownload Callback)
         {
-            PrepareDownload(ID, SelectedVersion);
+            PrepareDownload(ID, Type);
 
             var Client = new WebClient();
-            Client.DownloadFile(Project.Extension[ID].FileURL, Folder + "\\" + Project.Extension[ID].FileName);
+
+            if (Type == "Extension")
+            {
+                Client.DownloadFile(Project.Extension[ID].FileURL, Project.DownloadFolder + "\\" + Project.Extension[ID].FileName);
+            }
+            else
+            {
+                Client.DownloadFile(Project.Dependencies[ID].FileURL, Project.DownloadFolder + "\\" + Project.Dependencies[ID].FileName);
+            }
+            
 
             Callback(ID);
         }
 
-        public static void PrepareDownload(String ID, String SelectedVersion)
+        public static void PrepareDownload(String ID, String Type)
         {
             var Client = new WebClient();
 
-            var FileListDOM = Client.DownloadString("http://minecraft.curseforge.com/projects/" + ID + "/files?filter-game-version=" + Project.CodeVersions[SelectedVersion]);
+            var FileListDOM = Client.DownloadString("http://minecraft.curseforge.com/projects/" + ID + "/files?filter-game-version=" + Project.CodeVersions[Project.SelectedVersion]);
             var FileListQuery = CQ.Create(FileListDOM);
 
             var URL = "http://minecraft.curseforge.com" + FileListQuery["a.overflow-tip"].Attr("href");
@@ -196,25 +221,38 @@ namespace ModBuilder.Utilities
             var FileDOM = Client.DownloadString(URL);
             var FileQuery = CQ.Create(FileDOM);
 
-            GetFileName(ID, FileQuery);
-            GetFileURL(ID, URL);
+            GetFileName(ID, Type, FileQuery);
+            GetFileURL(ID, Type, URL);
         }
 
-        public static void GetFileName(String ID, CQ Query)
+        public static void GetFileName(String ID, String Type, CQ Query)
         {
             var FileName = Query["div.info-data"].First().Text();
 
-            Project.Extension[ID].FileName = FileName;
+            if (Type == "Extension")
+            {
+                Project.Extension[ID].FileName = FileName;
+            }
+            else
+            {
+                Project.Dependencies[ID].FileName = FileName;
+            }
         }
-
-        public static void GetFileURL(String ID, String URL)
+        public static void GetFileURL(String ID, String Type, String URL)
         {
             var ExplodeURL = URL.Split('/');
 
             var FirstCode = Int32.Parse(ExplodeURL[6].Substring(0, 4));
             var SecondCode = Int32.Parse(ExplodeURL[6].Substring(4));
 
-            Project.Extension[ID].FileURL = "https://addons-origin.cursecdn.com/files/" + FirstCode + "/" + SecondCode + "/" + Project.Extension[ID].FileName;
+            if (Type == "Extension")
+            {
+                Project.Extension[ID].FileURL = "https://addons-origin.cursecdn.com/files/" + FirstCode + "/" + SecondCode + "/" + Project.Extension[ID].FileName;
+            }
+            else
+            {
+                Project.Dependencies[ID].FileURL = "https://addons-origin.cursecdn.com/files/" + FirstCode + "/" + SecondCode + "/" + Project.Dependencies[ID].FileName;
+            }
         }
     }
 }
