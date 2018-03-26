@@ -93,11 +93,17 @@ namespace ModBuilder.GUI
             {
                 var ID = Project.List[Build_List.SelectedItem.ToString()];
 
+                Selected_Control_Delete.Enabled = true;
+
                 Selected_Name.Text = Project.Extension[ID].Name;
                 Selected_Type.Text = Project.Extension[ID].Type;
                 Selected_Image.Image = Project.Extension[ID].Image;
 
                 Draw_Selected_Available_List(ID);
+            }
+            else
+            {
+                Selected_Control_Delete.Enabled = false;
             }
         }
         private void Selected_Control_Delete_Click(object sender, EventArgs e)
@@ -119,6 +125,7 @@ namespace ModBuilder.GUI
         private void Search_Find_Click(object sender, EventArgs e)
         {
             Search_Find.Enabled = false;
+            Search_Add.Enabled = false;
 
             Parse.AsyncSearch(Search_Edit.Text, SearchCallback);
         }
@@ -225,6 +232,30 @@ namespace ModBuilder.GUI
             foreach (var Item in Project.Extension[ID].Versions)
             {
                 Selected_Available_List.Items.Add(Item);
+            }
+        }
+
+        private void Control_Available_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Control_Available.SelectedIndex > 0)
+            {
+                Control_Download.Enabled = true;
+            }
+            else
+            {
+                Control_Download.Enabled = false;
+            }
+        }
+
+        private void Search_List_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (Control_Available.SelectedIndex >= 0)
+            {
+                Search_Add.Enabled = true;
+            }
+            else
+            {
+                Search_Add.Enabled = false;
             }
         }
     }

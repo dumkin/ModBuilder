@@ -22,6 +22,8 @@ namespace ModBuilder.Utilities
         public static void GetAllData(String ID, CallbackGettingData Callback)
         {
             var Client = new WebClient();
+            Client.Headers["UserAgent"] = Project.UserAgent;
+
             var DOM = Client.DownloadString("http://minecraft.curseforge.com/projects/" + ID + "/files");
 
             var Query = CQ.Create(DOM);
@@ -90,8 +92,10 @@ namespace ModBuilder.Utilities
 
         public static void GetImage(String ID)
         {
-            var wc = new WebClient();
-            var bytes = wc.DownloadData(Project.Extension[ID].ImageURL);
+            var Client = new WebClient();
+            Client.Headers["UserAgent"] = Project.UserAgent;
+
+            var bytes = Client.DownloadData(Project.Extension[ID].ImageURL);
             var ms = new MemoryStream(bytes);
             var ImageSource = Image.FromStream(ms);
 
@@ -101,6 +105,8 @@ namespace ModBuilder.Utilities
         public static void GetDependencies(String ID)
         {
             var Client = new WebClient();
+            Client.Headers["UserAgent"] = Project.UserAgent;
+
             var DOM = Client.DownloadString("https://minecraft.curseforge.com/projects/" + ID + "/relations/dependencies?filter-related-dependencies=3");
 
             var Query = CQ.Create(DOM)["div.name-wrapper.overflow-tip > a"];
@@ -143,6 +149,8 @@ namespace ModBuilder.Utilities
         public static void Search(String Line, CallbackSearch Callback, int Page)
         {
             var Client = new WebClient();
+            Client.Headers["UserAgent"] = Project.UserAgent;
+
             var DOM = Client.DownloadString("https://minecraft.curseforge.com/search?projects-page=" + Page.ToString() + "&search=" + Line);
 
             var Query = CQ.Create(DOM)["div.results-name > a"];
@@ -195,16 +203,19 @@ namespace ModBuilder.Utilities
             PrepareDownload(ID, Type);
 
             var Client = new WebClient();
+            Client.Headers["UserAgent"] = Project.UserAgent;
 
+            Extension Ext;
             if (Type == "Extension")
             {
-                Client.DownloadFile(Project.Extension[ID].FileURL, Project.DownloadFolder + "\\" + Project.Extension[ID].FileName);
+                Ext = Project.Extension[ID];
             }
             else
             {
-                Client.DownloadFile(Project.Dependencies[ID].FileURL, Project.DownloadFolder + "\\" + Project.Dependencies[ID].FileName);
+                Ext = Project.Dependencies[ID];
             }
-            
+
+            Client.DownloadFile(Ext.FileURL, Project.DownloadFolder + "\\" + Ext.FileName);
 
             Callback(ID);
         }
@@ -212,6 +223,7 @@ namespace ModBuilder.Utilities
         public static void PrepareDownload(String ID, String Type)
         {
             var Client = new WebClient();
+            Client.Headers["UserAgent"] = Project.UserAgent;
 
             var FileListDOM = Client.DownloadString("http://minecraft.curseforge.com/projects/" + ID + "/files?filter-game-version=" + Project.CodeVersions[Project.SelectedVersion]);
             var FileListQuery = CQ.Create(FileListDOM);
@@ -247,11 +259,11 @@ namespace ModBuilder.Utilities
 
             if (Type == "Extension")
             {
-                Project.Extension[ID].FileURL = "https://addons-origin.cursecdn.com/files/" + FirstCode + "/" + SecondCode + "/" + Project.Extension[ID].FileName;
+                Project.Extension[ID].FileURL = "https://media.forgecdn.net/files/" + FirstCode + "/" + SecondCode + "/" + Uri.EscapeDataString(Project.Extension[ID].FileName);
             }
             else
             {
-                Project.Dependencies[ID].FileURL = "https://addons-origin.cursecdn.com/files/" + FirstCode + "/" + SecondCode + "/" + Project.Dependencies[ID].FileName;
+                Project.Dependencies[ID].FileURL = "https://media.forgecdn.net/files/" + FirstCode + "/" + SecondCode + "/" + Uri.EscapeDataString(Project.Dependencies[ID].FileName);
             }
         }
     }

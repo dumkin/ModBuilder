@@ -102,6 +102,7 @@
             this.Search_List.Size = new System.Drawing.Size(238, 108);
             this.Search_List.Sorted = true;
             this.Search_List.TabIndex = 4;
+            this.Search_List.SelectedIndexChanged += new System.EventHandler(this.Search_List_SelectedIndexChanged);
             // 
             // Build_List
             // 
@@ -129,6 +130,7 @@
             // Search_Add
             // 
             this.Search_Add.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.Search_Add.Enabled = false;
             this.Search_Add.Location = new System.Drawing.Point(169, 158);
             this.Search_Add.Name = "Search_Add";
             this.Search_Add.Size = new System.Drawing.Size(75, 23);
@@ -190,6 +192,7 @@
             // 
             // Selected_Control_Delete
             // 
+            this.Selected_Control_Delete.Enabled = false;
             this.Selected_Control_Delete.Location = new System.Drawing.Point(6, 19);
             this.Selected_Control_Delete.Name = "Selected_Control_Delete";
             this.Selected_Control_Delete.Size = new System.Drawing.Size(75, 23);
@@ -266,6 +269,7 @@
             // 
             // Control_Download
             // 
+            this.Control_Download.Enabled = false;
             this.Control_Download.Location = new System.Drawing.Point(170, 19);
             this.Control_Download.Name = "Control_Download";
             this.Control_Download.Size = new System.Drawing.Size(75, 23);
@@ -282,6 +286,7 @@
             this.Control_Available.Name = "Control_Available";
             this.Control_Available.Size = new System.Drawing.Size(158, 21);
             this.Control_Available.TabIndex = 12;
+            this.Control_Available.SelectedIndexChanged += new System.EventHandler(this.Control_Available_SelectedIndexChanged);
             // 
             // Status
             // 
