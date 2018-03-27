@@ -51,6 +51,7 @@
             this.Control_Available = new System.Windows.Forms.ComboBox();
             this.Status = new System.Windows.Forms.StatusStrip();
             this.Status_Label = new System.Windows.Forms.ToolStripStatusLabel();
+            this.Selected_Control_Browser = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.Selected_Image)).BeginInit();
             this.Search_Group.SuspendLayout();
             this.Selected_Group.SuspendLayout();
@@ -182,10 +183,11 @@
             // 
             // Selected_Control_Group
             // 
+            this.Selected_Control_Group.Controls.Add(this.Selected_Control_Browser);
             this.Selected_Control_Group.Controls.Add(this.Selected_Control_Delete);
-            this.Selected_Control_Group.Location = new System.Drawing.Point(346, 153);
+            this.Selected_Control_Group.Location = new System.Drawing.Point(366, 153);
             this.Selected_Control_Group.Name = "Selected_Control_Group";
-            this.Selected_Control_Group.Size = new System.Drawing.Size(155, 180);
+            this.Selected_Control_Group.Size = new System.Drawing.Size(135, 180);
             this.Selected_Control_Group.TabIndex = 10;
             this.Selected_Control_Group.TabStop = false;
             this.Selected_Control_Group.Text = "Selected control:";
@@ -193,9 +195,9 @@
             // Selected_Control_Delete
             // 
             this.Selected_Control_Delete.Enabled = false;
-            this.Selected_Control_Delete.Location = new System.Drawing.Point(6, 19);
+            this.Selected_Control_Delete.Location = new System.Drawing.Point(6, 151);
             this.Selected_Control_Delete.Name = "Selected_Control_Delete";
-            this.Selected_Control_Delete.Size = new System.Drawing.Size(75, 23);
+            this.Selected_Control_Delete.Size = new System.Drawing.Size(123, 23);
             this.Selected_Control_Delete.TabIndex = 0;
             this.Selected_Control_Delete.Text = "Delete";
             this.Selected_Control_Delete.UseVisualStyleBackColor = true;
@@ -304,6 +306,17 @@
             this.Status_Label.Size = new System.Drawing.Size(72, 17);
             this.Status_Label.Text = "Status_Label";
             // 
+            // Selected_Control_Browser
+            // 
+            this.Selected_Control_Browser.Enabled = false;
+            this.Selected_Control_Browser.Location = new System.Drawing.Point(6, 19);
+            this.Selected_Control_Browser.Name = "Selected_Control_Browser";
+            this.Selected_Control_Browser.Size = new System.Drawing.Size(123, 23);
+            this.Selected_Control_Browser.TabIndex = 1;
+            this.Selected_Control_Browser.Text = "Open in Browser";
+            this.Selected_Control_Browser.UseVisualStyleBackColor = true;
+            this.Selected_Control_Browser.Click += new System.EventHandler(this.Selected_Control_Browser_Click);
+            // 
             // Form_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -360,5 +373,6 @@
         private System.Windows.Forms.StatusStrip Status;
         private System.Windows.Forms.ToolStripStatusLabel Status_Label;
         private System.Windows.Forms.Button Control_Download;
+        private System.Windows.Forms.Button Selected_Control_Browser;
     }
 }

@@ -94,6 +94,7 @@ namespace ModBuilder.GUI
                 var ID = Project.List[Build_List.SelectedItem.ToString()];
 
                 Selected_Control_Delete.Enabled = true;
+                Selected_Control_Browser.Enabled = true;
 
                 Selected_Name.Text = Project.Extension[ID].Name;
                 Selected_Type.Text = Project.Extension[ID].Type;
@@ -104,19 +105,24 @@ namespace ModBuilder.GUI
             else
             {
                 Selected_Control_Delete.Enabled = false;
+                Selected_Control_Browser.Enabled = false;
             }
         }
         private void Selected_Control_Delete_Click(object sender, EventArgs e)
         {
             Enabled = false;
 
-            Project.Extension.Remove(Project.List[Build_List.SelectedItem.ToString()]);
+            var ID = Project.List[Build_List.SelectedItem.ToString()];
+
+            Project.Extension.Remove(ID);
+
 
             Config.Save(Project, Projects.SelectedProjectFile);
 
             Parse.GenerateAvailableVersions();
 
             Draw_Build_List();
+            Draw_Dependencies_List();
             Draw_Control_Available();
 
             Enabled = true;
@@ -257,6 +263,11 @@ namespace ModBuilder.GUI
             {
                 Search_Add.Enabled = false;
             }
+        }
+
+        private void Selected_Control_Browser_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://minecraft.curseforge.com/projects/" + Project.List[Build_List.SelectedItem.ToString()]);
         }
     }
 }
