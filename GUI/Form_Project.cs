@@ -1,14 +1,14 @@
-﻿using System;
+﻿using ModBuilder.ProjectSystem;
+using ModBuilder.Utilities;
+using System;
 using System.IO;
 using System.Windows.Forms;
-using ModBuilder.ProjectSystem;
-using ModBuilder.Utilities;
 
 namespace ModBuilder
 {
     public partial class Form_Project : Form
     {
-        Projects Projects = new Projects();
+        private Projects Projects = new Projects();
 
         public Form_Project()
         {
@@ -50,6 +50,7 @@ namespace ModBuilder
 
             Enabled = true;
         }
+
         private void Button_Load_Click(object sender, EventArgs e)
         {
             Enabled = false;
@@ -59,6 +60,7 @@ namespace ModBuilder
 
             Enabled = true;
         }
+
         private void Button_New_Click(object sender, EventArgs e)
         {
             Enabled = false;

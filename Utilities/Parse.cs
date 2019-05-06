@@ -14,11 +14,13 @@ namespace ModBuilder.Utilities
     public static class Parse
     {
         public delegate void CallbackGettingData(String ID);
+
         public static void AsyncGetAllData(String ID, CallbackGettingData Callback)
         {
             var ThreadAsyncGetAllData = new Thread(() => GetAllData(ID, Callback));
             ThreadAsyncGetAllData.Start();
         }
+
         public static void GetAllData(String ID, CallbackGettingData Callback)
         {
             var Client = new WebClient();
@@ -141,11 +143,13 @@ namespace ModBuilder.Utilities
         }
 
         public delegate void CallbackSearch();
+
         public static void AsyncSearch(String Line, CallbackSearch Callback, int Page = 0)
         {
             var ThreadAsyncSearch = new Thread(() => Search(Line, Callback, Page));
             ThreadAsyncSearch.Start();
         }
+
         public static void Search(String Line, CallbackSearch Callback, int Page)
         {
             var Client = new WebClient();
@@ -161,7 +165,7 @@ namespace ModBuilder.Utilities
             {
                 var URL = Item.GetAttribute("href");
                 var ID = URL.Split('/')[2].Split('?')[0];
-                
+
                 Project.Search[Item.TextContent] = ID;
             }
 
@@ -187,17 +191,20 @@ namespace ModBuilder.Utilities
                 }
             }
         }
+
         public static void AddAvailableVersions(String ID)
         {
             Project.AvailableVersions = Project.AvailableVersions.Intersect(Project.Extension[ID].Versions).ToList();
         }
 
         public delegate void CallbackDownload(String ID);
+
         public static void AsyncDownload(String ID, String Type, CallbackDownload Callback)
         {
             var ThreadAsyncDownload = new Thread(() => Download(ID, Type, Callback));
             ThreadAsyncDownload.Start();
         }
+
         public static void Download(String ID, String Type, CallbackDownload Callback)
         {
             PrepareDownload(ID, Type);
@@ -250,6 +257,7 @@ namespace ModBuilder.Utilities
                 Project.Dependencies[ID].FileName = FileName;
             }
         }
+
         public static void GetFileURL(String ID, String Type, String URL)
         {
             var ExplodeURL = URL.Split('/');

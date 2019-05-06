@@ -8,7 +8,7 @@ namespace ModBuilder.GUI
 {
     public partial class Form_Main : Form
     {
-        Project Project;
+        private Project Project;
 
         public Form_Main()
         {
@@ -63,6 +63,7 @@ namespace ModBuilder.GUI
 
             Enabled = true;
         }
+
         private void Form_Main_FormClosing(object sender, FormClosingEventArgs e)
         {
             Environment.Exit(0);
@@ -108,6 +109,7 @@ namespace ModBuilder.GUI
                 Selected_Control_Browser.Enabled = false;
             }
         }
+
         private void Selected_Control_Delete_Click(object sender, EventArgs e)
         {
             Enabled = false;
@@ -115,7 +117,6 @@ namespace ModBuilder.GUI
             var ID = Project.List[Build_List.SelectedItem.ToString()];
 
             Project.Extension.Remove(ID);
-
 
             Config.Save(Project, Projects.SelectedProjectFile);
 
@@ -135,6 +136,7 @@ namespace ModBuilder.GUI
 
             Parse.AsyncSearch(Search_Edit.Text, SearchCallback);
         }
+
         private void Search_Add_Click(object sender, EventArgs e)
         {
             var Name = Search_List.SelectedItem.ToString();
@@ -147,6 +149,7 @@ namespace ModBuilder.GUI
 
             Parse.AsyncGetAllData(ID, CallbackCheckingCache);
         }
+
         public void SearchCallback()
         {
             BeginInvoke(new MethodInvoker(delegate
@@ -178,6 +181,7 @@ namespace ModBuilder.GUI
                 }
             }
         }
+
         public void DownloadCallback(String ID)
         {
             Project.CountDownload++;
@@ -204,6 +208,7 @@ namespace ModBuilder.GUI
                 Control_Available.Items.Add(Item);
             }
         }
+
         public void Draw_Search_List()
         {
             Search_List.Items.Clear();
@@ -213,6 +218,7 @@ namespace ModBuilder.GUI
                 Search_List.Items.Add(Item.Key);
             }
         }
+
         public void Draw_Build_List()
         {
             Build_List.Items.Clear();
@@ -222,6 +228,7 @@ namespace ModBuilder.GUI
                 Build_List.Items.Add(Item.Value.Name);
             }
         }
+
         public void Draw_Dependencies_List()
         {
             Dependencies_List.Items.Clear();
@@ -231,6 +238,7 @@ namespace ModBuilder.GUI
                 Dependencies_List.Items.Add(Item.Value.Name);
             }
         }
+
         public void Draw_Selected_Available_List(String ID)
         {
             Selected_Available_List.Items.Clear();

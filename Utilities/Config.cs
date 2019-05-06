@@ -10,6 +10,7 @@ namespace ModBuilder.Utilities
             string Json = JsonConvert.SerializeObject(Data, Formatting.Indented);
             File.WriteAllText(FilePath, Json);
         }
+
         public static T Load<T>(string FilePath)
         {
             string Json = File.ReadAllText(FilePath);
